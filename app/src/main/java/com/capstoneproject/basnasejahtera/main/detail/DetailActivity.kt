@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailBinding
-import com.capstoneproject.basnasejahtera.main.MainViewModel
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.dataStore
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 import java.text.NumberFormat
@@ -82,10 +82,19 @@ class DetailActivity : AppCompatActivity() {
                 "Tipe Rumah ${rumah.tipeRumah}".also { tvName.text = it }
                 "Harga Rumah : Rp. $price".also { tvPrice.text = it }
                 "Progress Pembangunan : ${rumah.progressPembangunan}%".also { tvProgress.text = it }
-                "NIK : ${rumah.nik}".also { tvNIK.text = it }
-                "No Telp : ${rumah.noTelp}".also { tvTelp.text = it }
-                "Pekerjaan : ${rumah.pekerjaan}".also { tvPekerjaan.text = it }
-                "Alamat : ${rumah.alamat}".also { tvAlamat.text = it }
+
+                if (rumah.nik == null && rumah.noTelp == null && rumah.pekerjaan == null && rumah.alamat == null) {
+                    "NIK : -".also { tvNIK.text = it }
+                    "No Telp : -".also { tvTelp.text = it }
+                    "Pekerjaan : -".also { tvPekerjaan.text = it }
+                    "Alamat : -".also { tvAlamat.text = it }
+                } else {
+                    "NIK : ${rumah.nik}".also { tvNIK.text = it }
+                    "No Telp : ${rumah.noTelp}".also { tvTelp.text = it }
+                    "Pekerjaan : ${rumah.pekerjaan}".also { tvPekerjaan.text = it }
+                    "Alamat : ${rumah.alamat}".also { tvAlamat.text = it }
+                }
+
                 progressBar.progress = rumah.progressPembangunan
                 "${rumah.progressPembangunan}%".also { textViewProgress.text = it }
 

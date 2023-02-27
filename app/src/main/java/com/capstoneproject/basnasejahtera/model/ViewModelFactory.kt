@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.authentication.login.LoginViewModel
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupViewModel
-import com.capstoneproject.basnasejahtera.main.MainViewModel
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 

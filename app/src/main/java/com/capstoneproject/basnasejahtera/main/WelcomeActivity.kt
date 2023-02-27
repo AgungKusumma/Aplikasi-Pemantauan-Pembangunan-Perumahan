@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.authentication.login.LoginActivity
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityWelcomeBinding
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
