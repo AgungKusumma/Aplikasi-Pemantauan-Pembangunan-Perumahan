@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailKonsumenBinding
-import com.capstoneproject.basnasejahtera.main.MainViewModel
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.detail.DetailDataViewModel
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 import java.text.NumberFormat
@@ -66,10 +66,19 @@ class DetailKonsumenActivity : AppCompatActivity() {
     }
 
     private fun setupData() {
-        val idKonsumen = intent.getIntExtra("idKonsumen", 0)
+//        mainViewModel.getDataUserKonsumen().observe(this) {
+//            val id = it.id
+//            mainViewModel.getUser().observe(this) {
+//                if (id != null) {
+//                    detailDataViewModel.getDataRumahKonsumen(id)
+//                }
+//            }
+//        }
 
-        mainViewModel.getUser().observe(this) {
-            detailDataViewModel.getDataRumahKonsumen(idKonsumen)
+        mainViewModel.getDataUserKonsumen().observe(this) {
+            if (it.id != null) {
+                detailDataViewModel.getDataRumahKonsumen(it.id)
+            }
         }
 
         detailDataViewModel.dataRumah.observe(this) { rumah ->

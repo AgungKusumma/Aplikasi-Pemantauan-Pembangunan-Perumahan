@@ -11,7 +11,9 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.databinding.ActivitySplashScreenBinding
+import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.*
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 

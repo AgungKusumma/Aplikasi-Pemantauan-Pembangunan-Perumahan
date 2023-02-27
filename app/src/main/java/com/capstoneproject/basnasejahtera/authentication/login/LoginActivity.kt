@@ -16,7 +16,7 @@ import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityLoginBinding
-import com.capstoneproject.basnasejahtera.main.HomeKonsumenActivity
+import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.MainActivity
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.model.DataKonsumen
