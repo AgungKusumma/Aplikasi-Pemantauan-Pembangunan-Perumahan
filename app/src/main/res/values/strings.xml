@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">BasnaSejahtera</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="message_welcome_page">Wujudkan rumah impian anda di Perumahan Basna Sejahtera! Segera pesan rumah sekarang juga sebelum kehabisan!</string>
+    <string name="title_welcome_page">Selamat datang di Aplikasi Perumahan Basna Sejahtera!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Nama</string>
+    <string name="copyright">© 2023 PT BAS</string>
+    <string name="greeting">Halo %1$s,</string>
+    <string name="logout">Keluar</string>
+    <string name="logo_login">Logo Login</string>
+    <string name="enter_format_email">Masukkan format email dengan benar</string>
+    <string name="password_validation">Minimal 8 karakter</string>
+    <string name="message_login">Sudah memiliki akun?</string>
+    <string name="login_here">Masuk disini</string>
+    <string name="message_sign_up">Belum memiliki akun?</string>
+    <string name="register_here">Buat disini</string>
+    <string name="fab_home">"FAB Logout "</string>
+    <string name="logout_success">Logout Berhasil</string>
+    <string name="login_success">Login Berhasil</string>
+    <string name="data_name">Blok Rumah</string>
+    <string name="signup_success">Berhasil mendaftarkan akun!</string>
+    <string name="house_image">House Image</string>
+    <string name="status">status</string>
+    <string name="role_admin">Admin</string>
+    <string name="role_pegawai">Pegawai</string>
+    <string name="wrong_password_and_email">Email atau kata sandi salah</string>
+    <string name="login_failed">Gagal Login</string>
+
+    <string-array name="data_photo">
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+        <item>https://www.freepnglogos.com/uploads/logo-home-png/home-transparent-home-images-10.png</item>
+    </string-array>
+
+    <string-array name="id_home">
+        <item>A.01</item>
+        <item>A.02</item>
+        <item>A.03</item>
+        <item>A.04</item>
+        <item>A.05</item>
+        <item>A.06</item>
+        <item>A.07</item>
+        <item>A.08</item>
+        <item>A.09</item>
+        <item>A.10</item>
+    </string-array>
+
+    <string-array name="info_item">
+        <item>SOLD</item>
+        <item>SELL</item>
+        <item>BOOKED</item>
+        <item>BOOKED</item>
+        <item>SOLD</item>
+        <item>SOLD</item>
+        <item>SELL</item>
+        <item>BOOKED</item>
+        <item>BOOKED</item>
+        <item>SELL</item>
+    </string-array>
+
+    <string-array name="data_name">
+        <item>Ahmad Dahlan</item>
+        <item>Ahmad Yani</item>
+        <item>Sutomo</item>
+        <item>Gatot Soebroto</item>
+        <item>Ki Hadjar Dewantarai</item>
+        <item>Mohammad Hatta</item>
+        <item>Soedirman</item>
+        <item>Soekarno</item>
+        <item>Soepomo</item>
+        <item>Soeharto</item>
+    </string-array>
+
+    <integer-array name="data_status">
+        <item>100</item>
+        <item>70</item>
+        <item>90</item>
+        <item>30</item>
+        <item>15</item>
+        <item>50</item>
+        <item>5</item>
+        <item>0</item>
+        <item>95</item>
+        <item>70</item>
+    </integer-array>
+
+</resources>
