@@ -27,6 +27,18 @@ class UserRepository private constructor(
 //        return apiService.userRegister(user)
 //    }
 
+    fun getDataRumah(): Call<List<DataRumahResponseItem>> {
+        return apiService.getDataRumah("a")
+    }
+
+    fun getDetailDataRumah(id: Int): Call<DetailDataRumahResponse> {
+        return apiService.getDetailRumah(id)
+    }
+
+    fun getDetailDataRumahKonsumen(id: Int): Call<DetailDataRumahResponse> {
+        return apiService.getDetailRumahKonsumen(id)
+    }
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null

@@ -16,8 +16,10 @@ import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityLoginBinding
+import com.capstoneproject.basnasejahtera.main.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.MainActivity
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
+import com.capstoneproject.basnasejahtera.model.DataKonsumen
 import com.capstoneproject.basnasejahtera.model.UserModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var authenticationViewModel: AuthenticationViewModel
     private lateinit var user: UserModel
+    private lateinit var konsumen: DataKonsumen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +68,15 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.getUser().observe(this) { user ->
             this.user = user
         }
+
+        loginViewModel.getDataUserKonsumen().observe(this) { konsumen ->
+            this.konsumen = konsumen
+        }
     }
 
     private fun setupAction() {
         val pegawai = getString(R.string.role_pegawai)
+        val konsumen = getString(R.string.role_konsumen)
         val admin = getString(R.string.role_admin)
 
         binding.apply {
@@ -92,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                                     authenticationViewModel.user.observe(this@LoginActivity) { event ->
                                         event.getContentIfNotHandled()?.let {
                                             loginViewModel.saveData(it.role)
+                                            loginViewModel.saveDataKonsumen(it.dataKonsumen?.id)
                                             when (it.role) {
                                                 pegawai -> {
                                                     val intent = Intent(this@LoginActivity,
@@ -101,9 +110,9 @@ class LoginActivity : AppCompatActivity() {
                                                     startActivity(intent)
                                                     finish()
                                                 }
-                                                admin -> {
+                                                konsumen -> {
                                                     val intent = Intent(this@LoginActivity,
-                                                        WelcomeActivity::class.java)
+                                                        HomeKonsumenActivity::class.java)
                                                     intent.flags =
                                                         Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                                     startActivity(intent)

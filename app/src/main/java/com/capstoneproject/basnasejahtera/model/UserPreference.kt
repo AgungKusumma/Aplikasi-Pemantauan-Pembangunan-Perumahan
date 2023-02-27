@@ -2,10 +2,7 @@ package com.capstoneproject.basnasejahtera.model
 
 import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -14,11 +11,19 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
     fun getUser(): Flow<UserModel> {
         return dataStore.data.map { preferences ->
             UserModel(
-                preferences[NAME_KEY] ?:"",
-                preferences[EMAIL_KEY] ?:"",
-                preferences[PASSWORD_KEY] ?:"",
-                preferences[ROLE_KEY] ?:"",
-                preferences[STATE_KEY] ?: false
+                preferences[NAME_KEY] ?: "",
+                preferences[EMAIL_KEY] ?: "",
+                preferences[PASSWORD_KEY] ?: "",
+                preferences[ROLE_KEY] ?: "",
+                preferences[STATE_KEY] ?: false,
+            )
+        }
+    }
+
+    fun getDataUserKonsumen(): Flow<DataKonsumen> {
+        return dataStore.data.map { preferences ->
+            DataKonsumen(
+                preferences[ID_KONSUMEN] ?: 0,
             )
         }
     }
@@ -29,6 +34,14 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             Log.d("Role", "Account : $role")
         }
     }
+
+    suspend fun saveDataKonsumen(id: Int) {
+        dataStore.edit {
+            it[ID_KONSUMEN] = id
+            Log.d("ID", "Konsumen : $id")
+        }
+    }
+
 
     suspend fun saveUser(user: UserModel) {
         dataStore.edit { preferences ->
@@ -61,6 +74,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val PASSWORD_KEY = stringPreferencesKey("kata_sandi")
         private val ROLE_KEY = stringPreferencesKey("role")
         private val STATE_KEY = booleanPreferencesKey("state")
+
+        private val ID_KONSUMEN = intPreferencesKey("id")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

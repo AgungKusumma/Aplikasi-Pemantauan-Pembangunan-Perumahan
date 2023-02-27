@@ -21,12 +21,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/house_image"
+            android:src="@drawable/house"
             card_view:layout_constraintBottom_toTopOf="@+id/tv_item_blok"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/house"
-            android:contentDescription="@string/house_image" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_item_blok"
