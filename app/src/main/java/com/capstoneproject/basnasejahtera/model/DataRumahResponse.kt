@@ -30,9 +30,7 @@ data class DataRumahResponseItem(
 
 @Parcelize
 data class DataBlokRumahResponseItem(
-    @field:SerializedName("id")
-    val id: Int,
 
     @field:SerializedName("nama")
-    val nama: String,
+    var nama: String,
 ) : Parcelable

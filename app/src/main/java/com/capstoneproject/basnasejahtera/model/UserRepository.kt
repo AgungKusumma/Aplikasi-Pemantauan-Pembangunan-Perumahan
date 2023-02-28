@@ -35,6 +35,10 @@ class UserRepository private constructor(
         return apiService.getDataRumah(namaBlok)
     }
 
+    fun getAllDataRumah(): Call<List<DataRumahResponseItem>> {
+        return apiService.getAllDataRumah()
+    }
+
     fun getDetailDataRumah(id: Int): Call<DetailDataRumahResponse> {
         return apiService.getDetailRumah(id)
     }

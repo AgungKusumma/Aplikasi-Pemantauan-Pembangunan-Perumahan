@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -66,19 +67,14 @@ class DetailKonsumenActivity : AppCompatActivity() {
     }
 
     private fun setupData() {
-//        mainViewModel.getDataUserKonsumen().observe(this) {
-//            val id = it.id
-//            mainViewModel.getUser().observe(this) {
-//                if (id != null) {
-//                    detailDataViewModel.getDataRumahKonsumen(id)
-//                }
-//            }
-//        }
-
         mainViewModel.getDataUserKonsumen().observe(this) {
             if (it.id != null) {
                 detailDataViewModel.getDataRumahKonsumen(it.id)
             }
+        }
+
+        detailDataViewModel.isLoading.observe(this) {
+            showLoading(it)
         }
 
         detailDataViewModel.dataRumah.observe(this) { rumah ->
@@ -111,5 +107,9 @@ class DetailKonsumenActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

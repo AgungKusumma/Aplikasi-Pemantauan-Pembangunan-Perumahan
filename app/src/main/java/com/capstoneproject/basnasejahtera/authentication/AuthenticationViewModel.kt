@@ -22,17 +22,21 @@ class AuthenticationViewModel(private val userRepository: UserRepository) : View
     private var _error = MutableLiveData<Event<Boolean>>()
     val error: LiveData<Event<Boolean>> = _error
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun userLogin(email: String, kataSandi: String) {
+        _isLoading.value = true
         val client = userRepository.userLogin(email, kataSandi)
         client.enqueue(object : Callback<UserModel> {
             override fun onResponse(
                 call: Call<UserModel>,
                 response: Response<UserModel>,
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
                     _error.value = Event(false)
                     userRepository.appExecutors.networkIO.execute {
-                        Log.d(LOGIN, "onResponse: " + response.body())
                         _user.postValue(Event(response.body()!!))
                     }
                 } else {
@@ -44,6 +48,7 @@ class AuthenticationViewModel(private val userRepository: UserRepository) : View
 
             override fun onFailure(call: Call<UserModel>, t: Throwable) {
                 Log.e(LOGIN, "onFailure: " + t.message)
+                _isLoading.value = false
                 _message.value = Event(t.message.toString())
                 _error.value = Event(true)
             }

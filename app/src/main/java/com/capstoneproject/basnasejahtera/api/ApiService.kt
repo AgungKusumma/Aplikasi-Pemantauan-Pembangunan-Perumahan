@@ -26,6 +26,9 @@ interface ApiService {
         @Query("namaBlok") page: String,
     ): Call<List<DataRumahResponseItem>>
 
+    @GET("rumah/seluruh/data")
+    fun getAllDataRumah(): Call<List<DataRumahResponseItem>>
+
     @GET("rumah/{idRumah}")
     fun getDetailRumah(
         @Path("idRumah") id: Int,

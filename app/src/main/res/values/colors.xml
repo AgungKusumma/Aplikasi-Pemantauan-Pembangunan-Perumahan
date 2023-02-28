@@ -9,5 +9,7 @@
     <color name="gray_200">#EEEEEE</color>
     <color name="blue_700">#1976D2</color>
     <color name="blue">#407BFF</color>
+    <color name="blue_50">#E3F2FD</color>
+    <color name="blue_100">#BBDEFB</color>
     <color name="maroon">#B23B3B</color>
 </resources>
