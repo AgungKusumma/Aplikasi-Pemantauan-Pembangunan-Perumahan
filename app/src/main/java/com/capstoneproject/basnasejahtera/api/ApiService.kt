@@ -1,5 +1,6 @@
 package com.capstoneproject.basnasejahtera.api
 
+import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
 import com.capstoneproject.basnasejahtera.model.DetailDataRumahResponse
 import com.capstoneproject.basnasejahtera.model.UserModel
@@ -16,6 +17,9 @@ interface ApiService {
     fun userLogin(
         @Body user: Map<String, String>,
     ): Call<UserModel>
+
+    @GET("blok")
+    fun getBlok(): Call<List<DataBlokRumahResponseItem>>
 
     @GET("rumah")
     fun getDataRumah(

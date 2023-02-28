@@ -61,7 +61,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         mainViewModel.getUser().observe(this) { user ->
             if (user.isLogin && user.role == pegawai) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else if (user.isLogin && user.role == konsumen) {
                 startActivity(Intent(this, HomeKonsumenActivity::class.java))

@@ -26,6 +26,12 @@ data class DataRumahResponseItem(
 
     @field:SerializedName("id_blok")
     val idBlok: Int,
+) : Parcelable
+
+@Parcelize
+data class DataBlokRumahResponseItem(
+    @field:SerializedName("id")
+    val id: Int,
 
     @field:SerializedName("nama")
     val nama: String,

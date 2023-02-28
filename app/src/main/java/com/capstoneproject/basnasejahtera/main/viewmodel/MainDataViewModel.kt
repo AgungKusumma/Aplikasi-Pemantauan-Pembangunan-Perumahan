@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
 import com.capstoneproject.basnasejahtera.model.UserRepository
 import com.capstoneproject.basnasejahtera.utils.Event
@@ -18,6 +19,9 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
     private var _dataRumah = MutableLiveData<List<DataRumahResponseItem>>()
     val dataRumah: LiveData<List<DataRumahResponseItem>> = _dataRumah
 
+    private var _dataBlok = MutableLiveData<List<DataBlokRumahResponseItem>>()
+    val dataBlok: LiveData<List<DataBlokRumahResponseItem>> = _dataBlok
+
     private var _message = MutableLiveData<Event<String>>()
 
     private var _error = MutableLiveData<Event<Boolean>>()
@@ -26,9 +30,9 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getDataRumah() {
+    fun getDataRumah(namaBlok: String) {
         _isLoading.value = true
-        val client = userRepository.getDataRumah()
+        val client = userRepository.getDataRumah(namaBlok)
         client.enqueue(object : Callback<List<DataRumahResponseItem>> {
             override fun onResponse(
                 call: Call<List<DataRumahResponseItem>>,
@@ -47,6 +51,36 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
 
             override fun onFailure(
                 call: Call<List<DataRumahResponseItem>>,
+                t: Throwable,
+            ) {
+                Log.e(TAG, "onFailure: " + t.message)
+                _isLoading.value = false
+                _message.value = Event(t.message.toString())
+            }
+        })
+    }
+
+    fun getBlok() {
+        _isLoading.value = true
+        val client = userRepository.getBlok()
+        client.enqueue(object : Callback<List<DataBlokRumahResponseItem>> {
+            override fun onResponse(
+                call: Call<List<DataBlokRumahResponseItem>>,
+                response: Response<List<DataBlokRumahResponseItem>>,
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    userRepository.appExecutors.networkIO.execute {
+                        _dataBlok.postValue(response.body()!!)
+                    }
+                } else {
+                    Log.e(TAG, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                }
+            }
+
+            override fun onFailure(
+                call: Call<List<DataBlokRumahResponseItem>>,
                 t: Throwable,
             ) {
                 Log.e(TAG, "onFailure: " + t.message)

@@ -27,8 +27,12 @@ class UserRepository private constructor(
 //        return apiService.userRegister(user)
 //    }
 
-    fun getDataRumah(): Call<List<DataRumahResponseItem>> {
-        return apiService.getDataRumah("a")
+    fun getBlok(): Call<List<DataBlokRumahResponseItem>> {
+        return apiService.getBlok()
+    }
+
+    fun getDataRumah(namaBlok: String): Call<List<DataRumahResponseItem>> {
+        return apiService.getDataRumah(namaBlok)
     }
 
     fun getDetailDataRumah(id: Int): Call<DetailDataRumahResponse> {

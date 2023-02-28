@@ -17,7 +17,7 @@ import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityLoginBinding
 import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
-import com.capstoneproject.basnasejahtera.main.MainActivity
+import com.capstoneproject.basnasejahtera.main.HomeActivity
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.model.DataKonsumen
 import com.capstoneproject.basnasejahtera.model.UserModel
@@ -104,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                                             when (it.role) {
                                                 pegawai -> {
                                                     val intent = Intent(this@LoginActivity,
-                                                        MainActivity::class.java)
+                                                        HomeActivity::class.java)
                                                     intent.flags =
                                                         Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                                     startActivity(intent)
