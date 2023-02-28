@@ -33,5 +33,7 @@
     <string name="pekerjaan">Pekerjaan</string>
     <string name="alamat">Alamat</string>
     <string name="logo_app">Logo App</string>
-
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="logo_image">Logo Image</string>
 </resources>

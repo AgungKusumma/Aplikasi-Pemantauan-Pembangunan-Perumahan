@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setupViewModel()
         setupListData()
         showRecyclerList()
-        setupAction()
     }
 
     private fun setupView() {
@@ -67,8 +65,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupListData() {
+        val namaBlok = intent.getStringExtra("namaBlok")
+
         mainViewModel.getUser().observe(this) {
-            mainDataViewModel.getDataRumah()
+            if (namaBlok != null) {
+                mainDataViewModel.getDataRumah(namaBlok)
+            }
         }
     }
 
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainDataViewModel.dataRumah.observe(this) {
-            adapter.setListOrder(it)
+            adapter.setListRumah(it)
         }
 
         mainDataViewModel.error.observe(this) { event ->
@@ -91,14 +93,6 @@ class MainActivity : AppCompatActivity() {
                     binding.rvItemHouse.adapter = null
                 }
             }
-        }
-    }
-
-    private fun setupAction() {
-        binding.fabLogout.setOnClickListener {
-            mainViewModel.logout()
-            Toast.makeText(this@MainActivity,
-                getString(R.string.logout_success), Toast.LENGTH_LONG).show()
         }
     }
 }

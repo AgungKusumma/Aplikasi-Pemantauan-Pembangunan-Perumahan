@@ -2,21 +2,23 @@ package com.capstoneproject.basnasejahtera.main
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityHomeBinding
+import com.capstoneproject.basnasejahtera.main.adapter.ListBlokAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -24,27 +26,26 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
+    private lateinit var adapter: ListBlokAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
         setupViewModel()
-    }
+        setupListData()
+        showRecyclerList()
+        setupAction()
 
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
+        val date = SimpleDateFormat("E, dd MMMM yyyy")
+        val time = SimpleDateFormat("hh:mm a")
+
+        val currentDate = date.format(Date())
+        val currentTime = time.format(Date())
+
+        binding.tvDate.text = currentDate
+        binding.tvTime.text = currentTime
     }
 
     private fun setupViewModel() {
@@ -62,6 +63,42 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
+        }
+    }
+
+    private fun setupListData() {
+        mainViewModel.getUser().observe(this) {
+            mainDataViewModel.getBlok()
+        }
+    }
+
+    private fun showRecyclerList() {
+        adapter = ListBlokAdapter()
+
+        binding.apply {
+            rvItemHouse.layoutManager = GridLayoutManager(this@HomeActivity, 2)
+            rvItemHouse.setHasFixedSize(true)
+            rvItemHouse.adapter = adapter
+        }
+
+        mainDataViewModel.dataBlok.observe(this) {
+            adapter.setListBlok(it)
+        }
+
+        mainDataViewModel.error.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { error ->
+                if (error) {
+                    binding.rvItemHouse.adapter = null
+                }
+            }
+        }
+    }
+
+    private fun setupAction() {
+        binding.fabLogout.setOnClickListener {
+            mainViewModel.logout()
+            Toast.makeText(this@HomeActivity,
+                getString(R.string.logout_success), Toast.LENGTH_LONG).show()
         }
     }
 }

@@ -16,7 +16,7 @@ class ListDataRumahAdapter : RecyclerView.Adapter<ListDataRumahAdapter.ListViewH
     private var listDataRumah = ArrayList<DataRumahResponseItem>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setListOrder(menu: List<DataRumahResponseItem>) {
+    fun setListRumah(menu: List<DataRumahResponseItem>) {
         listDataRumah.clear()
         listDataRumah.addAll(menu)
         notifyDataSetChanged()
