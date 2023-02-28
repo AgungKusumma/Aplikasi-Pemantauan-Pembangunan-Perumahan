@@ -60,6 +60,36 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
         })
     }
 
+    fun getAllDataRumah() {
+        _isLoading.value = true
+        val client = userRepository.getAllDataRumah()
+        client.enqueue(object : Callback<List<DataRumahResponseItem>> {
+            override fun onResponse(
+                call: Call<List<DataRumahResponseItem>>,
+                response: Response<List<DataRumahResponseItem>>,
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    userRepository.appExecutors.networkIO.execute {
+                        _dataRumah.postValue(response.body()!!)
+                    }
+                } else {
+                    Log.e(TAG, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                }
+            }
+
+            override fun onFailure(
+                call: Call<List<DataRumahResponseItem>>,
+                t: Throwable,
+            ) {
+                Log.e(TAG, "onFailure: " + t.message)
+                _isLoading.value = false
+                _message.value = Event(t.message.toString())
+            }
+        })
+    }
+
     fun getBlok() {
         _isLoading.value = true
         val client = userRepository.getBlok()

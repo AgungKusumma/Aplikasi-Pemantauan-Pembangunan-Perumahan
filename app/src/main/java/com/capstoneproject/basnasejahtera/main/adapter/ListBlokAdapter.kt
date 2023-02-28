@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.main.MainActivity
 import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
@@ -18,6 +20,7 @@ class ListBlokAdapter : RecyclerView.Adapter<ListBlokAdapter.ListViewHolder>() {
     fun setListBlok(menu: List<DataBlokRumahResponseItem>) {
         listBlok.clear()
         listBlok.addAll(menu)
+        listBlok.add(DataBlokRumahResponseItem(nama = "all"))
         notifyDataSetChanged()
     }
 
@@ -37,11 +40,21 @@ class ListBlokAdapter : RecyclerView.Adapter<ListBlokAdapter.ListViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(dataBlok: DataBlokRumahResponseItem) {
             binding.apply {
-                "Blok ${dataBlok.nama}".also { tvItemBlok.text = it }
+                val namaBlok = dataBlok.nama
+
+                if (namaBlok == "all") {
+                    "Seluruh Data Rumah".also { tvItemBlok.text = it }
+                    binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                        R.color.blue_100))
+                } else {
+                    "Blok $namaBlok".also { tvItemBlok.text = it }
+                    binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                        R.color.blue_50))
+                }
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, MainActivity::class.java)
-                    intent.putExtra("namaBlok", dataBlok.nama)
+                    intent.putExtra("namaBlok", namaBlok)
                     itemView.context.startActivity(intent)
                 }
             }

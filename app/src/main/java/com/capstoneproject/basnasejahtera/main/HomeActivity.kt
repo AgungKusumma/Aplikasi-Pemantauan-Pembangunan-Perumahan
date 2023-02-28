@@ -3,6 +3,7 @@ package com.capstoneproject.basnasejahtera.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -34,18 +35,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupViewModel()
+        setupDateandTime()
         setupListData()
         showRecyclerList()
         setupAction()
-
-        val date = SimpleDateFormat("E, dd MMMM yyyy")
-        val time = SimpleDateFormat("hh:mm a")
-
-        val currentDate = date.format(Date())
-        val currentTime = time.format(Date())
-
-        binding.tvDate.text = currentDate
-        binding.tvTime.text = currentTime
     }
 
     private fun setupViewModel() {
@@ -66,6 +59,17 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupDateandTime() {
+        val date = SimpleDateFormat("E, dd MMMM yyyy")
+        val time = SimpleDateFormat("hh:mm a")
+
+        val currentDate = date.format(Date())
+        val currentTime = time.format(Date())
+
+        binding.tvDate.text = currentDate
+        binding.tvTime.text = currentTime
+    }
+
     private fun setupListData() {
         mainViewModel.getUser().observe(this) {
             mainDataViewModel.getBlok()
@@ -79,6 +83,10 @@ class HomeActivity : AppCompatActivity() {
             rvItemHouse.layoutManager = GridLayoutManager(this@HomeActivity, 2)
             rvItemHouse.setHasFixedSize(true)
             rvItemHouse.adapter = adapter
+        }
+
+        mainDataViewModel.isLoading.observe(this) {
+            showLoading(it)
         }
 
         mainDataViewModel.dataBlok.observe(this) {
@@ -100,5 +108,14 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(this@HomeActivity,
                 getString(R.string.logout_success), Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupDateandTime()
     }
 }

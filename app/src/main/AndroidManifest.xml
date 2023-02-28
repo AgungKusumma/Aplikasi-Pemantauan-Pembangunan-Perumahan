@@ -19,7 +19,6 @@
         <activity
             android:name=".konsumen.HomeKonsumenActivity"
             android:exported="false" />
-
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true">
@@ -42,8 +41,8 @@
         </activity>
         <activity
             android:name=".konsumen.DetailKonsumenActivity"
-            android:parentActivityName=".konsumen.HomeKonsumenActivity"
-            android:exported="false">
+            android:exported="false"
+            android:parentActivityName=".konsumen.HomeKonsumenActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

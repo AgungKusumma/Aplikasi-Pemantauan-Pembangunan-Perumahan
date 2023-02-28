@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +73,10 @@ class DetailActivity : AppCompatActivity() {
             detailDataViewModel.getDataRumah(idRumah)
         }
 
+        detailDataViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
         detailDataViewModel.dataRumah.observe(this) { rumah ->
             val localeID = Locale("in", "ID")
             val nf: NumberFormat = NumberFormat.getInstance(localeID)
@@ -111,43 +116,9 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
 
-//        detailDataViewModel.error.observe(this) { event ->
-//            event.getContentIfNotHandled()?.let { error ->
-//                if (!error) {
-//                    detailDataViewModel.dataRumah.observe(this) { rumah ->
-//                        val localeID = Locale("in", "ID")
-//                        val nf: NumberFormat = NumberFormat.getInstance(localeID)
-//                        val price = nf.format(rumah.harga)
-//
-//                        binding.apply {
-////                Glide.with(applicationContext)
-////                    .load(rumah.photo)
-////                    .circleCrop()
-////                    .into(ivHouse)
-//                            "Blok ${rumah.nomorRumah}".also { tvBlok.text = it }
-//                            "Tipe Rumah ${rumah.tipeRumah}".also { tvName.text = it }
-//                            "Harga Rumah : Rp. $price".also { tvPrice.text = it }
-//                            progressBar.progress = rumah.progressPembangunan
-//                            "${rumah.progressPembangunan}%".also { textViewProgress.text = it }
-//
-//                            when (rumah.statusRumah) {
-//                                "terjual" -> {
-//                                    binding.ivHouse.setBackgroundColor(Color.GREEN)
-//                                }
-//                                "di booking" -> {
-//                                    binding.ivHouse.setBackgroundColor(Color.YELLOW)
-//                                }
-//                                "belum terjual" -> {
-//                                    binding.ivHouse.setBackgroundColor(Color.WHITE)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
