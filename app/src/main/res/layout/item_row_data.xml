@@ -37,7 +37,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/iv_house"

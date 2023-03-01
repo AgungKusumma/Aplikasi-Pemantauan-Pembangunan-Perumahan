@@ -17,7 +17,8 @@ class ApiConfig {
             .addInterceptor(loggingInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.100.134:3000/") //Home
+//            .baseUrl("http://192.168.100.134:3000/") //Home
+            .baseUrl("http://192.168.43.131:3000/") //Hotspot
 //            .baseUrl("http://10.100.10.177:3000/") //Neat
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

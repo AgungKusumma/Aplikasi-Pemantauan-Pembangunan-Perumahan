@@ -36,4 +36,16 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="logo_image">Logo Image</string>
+
+    <string-array name="data_photo">
+        <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
+        <item>https://img.icons8.com/ios-glyphs/256/man-on-phone--v1.png</item>
+        <item>https://img.icons8.com/ios-filled/256/user-manual.png</item>
+    </string-array>
+
+    <string-array name="data_home_konsumen">
+        <item>Rumah Saya</item>
+        <item>Hubungi Admin</item>
+        <item>Panduan</item>
+    </string-array>
 </resources>
