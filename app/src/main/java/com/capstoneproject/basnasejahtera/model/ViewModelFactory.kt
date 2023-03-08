@@ -3,7 +3,6 @@ package com.capstoneproject.basnasejahtera.model
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.authentication.login.LoginViewModel
-import com.capstoneproject.basnasejahtera.authentication.signup.SignupViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -16,9 +15,6 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T
-            }
-            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
-                SignupViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

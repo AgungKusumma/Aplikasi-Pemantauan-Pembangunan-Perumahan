@@ -1,27 +1,16 @@
 package com.capstoneproject.basnasejahtera.authentication.signup
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.databinding.ActivitySignupBinding
-import com.capstoneproject.basnasejahtera.model.UserModel
-import com.capstoneproject.basnasejahtera.model.UserPreference
-import com.capstoneproject.basnasejahtera.model.ViewModelFactory
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private lateinit var signupViewModel: SignupViewModel
     private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +23,6 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        signupViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
-        )[SignupViewModel::class.java]
-
         authenticationViewModel = AuthenticationViewModel.getInstance(this)
     }
 
@@ -75,8 +59,6 @@ class SignupActivity : AppCompatActivity() {
                     binding.pekerjaanEditTextLayout.error = "Masukkan Pekerjaan"
                 }
                 else -> {
-                    signupViewModel.saveUser(UserModel(name, email, password, "role", false))
-
                     authenticationViewModel.userRegister(email,
                         password,
                         name,

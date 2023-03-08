@@ -1,9 +1,7 @@
 package com.capstoneproject.basnasejahtera.main
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.databinding.ActivityProgressBinding
@@ -16,7 +14,6 @@ class ProgressActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProgressBinding
     private lateinit var mainViewModel: MainViewModel
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProgressBinding.inflate(layoutInflater)
@@ -40,18 +37,17 @@ class ProgressActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setupData() {
         val nomorRumah = intent.getStringExtra("nomorRumah")
         val updatedAt = intent.getStringExtra("updatedAt")
         val progress = intent.getIntExtra("progress", 0)
         val time = updatedAt?.dropLast(8)
         val cutTime = time?.drop(11)
-        val cutDate = updatedAt?.dropLast(17)
+        val cutDate = updatedAt?.dropLast(14)
 
         binding.apply {
             "Blok $nomorRumah".also { tvBlok.text = it }
-            "Terakhir Update : $cutDate $cutTime WIB".also { binding.tvLastUpdate.text = it }
+            "Terakhir Update : $cutDate || $cutTime WIB".also { binding.tvLastUpdate.text = it }
             progressBar.progress = progress
             "$progress%".also { textViewProgress.text = it }
         }
