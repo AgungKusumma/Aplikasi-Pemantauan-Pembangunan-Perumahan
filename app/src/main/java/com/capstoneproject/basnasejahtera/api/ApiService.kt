@@ -5,10 +5,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-//    @POST("register")
-//    fun userRegister(
-//        @Body user: Map<String, String>,
-//    ): Call<UserModel>
+    @POST("register")
+    fun userRegister(
+        @Body user: Map<String, String>,
+    ): Call<UserModel>
 
     @POST("login")
     fun userLogin(
@@ -36,11 +36,9 @@ interface ApiService {
         @Path("idKonsumen") id: Int,
     ): Call<DetailDataRumahResponse>
 
-    //    @FormUrlEncoded
     @POST("rumah/status-pembangunan/{idRumah}/")
     fun updateStatusPembangunan(
         @Path("idRumah") idRumah: Int,
-//        @Field("statusPembangunadadadn") statusPembangunan: Int,
         @Body statusPembangunan: DataStatus,
     ): Call<DataUpdateResponse>
 }

@@ -11,6 +11,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
+import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.databinding.ActivitySignupBinding
 import com.capstoneproject.basnasejahtera.model.UserModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
@@ -21,6 +22,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var signupViewModel: SignupViewModel
+    private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,8 @@ class SignupActivity : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[SignupViewModel::class.java]
+
+        authenticationViewModel = AuthenticationViewModel.getInstance(this)
     }
 
     private fun setupAction() {
@@ -72,12 +76,31 @@ class SignupActivity : AppCompatActivity() {
                 }
                 else -> {
                     signupViewModel.saveUser(UserModel(name, email, password, "role", false))
-                    Toast.makeText(this,
-                        getString(R.string.signup_success),
-                        Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, HomeAdminActivity::class.java)
-                    startActivity(intent)
-                    finish()
+
+                    authenticationViewModel.userRegister(email,
+                        password,
+                        name,
+                        noHp,
+                        "Konsumen",
+                        nik,
+                        pekerjaan,
+                        alamat)
+                    authenticationViewModel.error.observe(this@SignupActivity) { event ->
+                        event.getContentIfNotHandled()?.let { error ->
+                            if (!error) {
+                                Toast.makeText(this,
+                                    getString(R.string.signup_success),
+                                    Toast.LENGTH_LONG).show()
+                                val intent = Intent(this, HomeAdminActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this,
+                                    getString(R.string.signup_failed),
+                                    Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
                 }
             }
         }

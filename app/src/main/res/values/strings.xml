@@ -43,6 +43,12 @@
     <string name="dropdown_image">Dropdown Image</string>
     <string name="success_update_status_pembangunan">Berhasil Update Data</string>
     <string name="update_failed">Gagal Update Data</string>
+    <string name="img_progress">Image Progress Pembangunan</string>
+    <string name="last_update">Terakhir Update</string>
+    <string name="persentase">Persentase Progress Pembangunan :</string>
+    <string name="detail_progress">Detail Progress Pembangunan :</string>
+    <string name="btn_progress">Lihat Progress Pembangunan</string>
+    <string name="signup_failed">Akun sudah ada</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
