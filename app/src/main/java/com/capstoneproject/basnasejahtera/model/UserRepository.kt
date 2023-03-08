@@ -47,6 +47,13 @@ class UserRepository private constructor(
         return apiService.getDetailRumahKonsumen(id)
     }
 
+    fun updateStatusPembangunan(
+        idRumah: Int,
+        statusPembangunan: DataStatus,
+    ): Call<DataUpdateResponse> {
+        return apiService.updateStatusPembangunan(idRumah, statusPembangunan)
+    }
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null

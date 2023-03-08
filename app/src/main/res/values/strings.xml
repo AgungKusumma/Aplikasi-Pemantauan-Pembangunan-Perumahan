@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Basna Sejahtera</string>
-    <string name="signup">Daftar</string>
+    <string name="signup">Simpan</string>
     <string name="login">Masuk</string>
     <string name="message_welcome_page">Wujudkan rumah impian anda di Perumahan Basna Sejahtera! Segera pesan rumah sekarang juga sebelum kehabisan!</string>
     <string name="title_welcome_page">Selamat datang di Aplikasi Perumahan Basna Sejahtera!</string>
@@ -11,10 +11,12 @@
     <string name="logo_login">Logo Login</string>
     <string name="enter_format_email">Masukkan format email dengan benar</string>
     <string name="password_validation">Minimal 8 karakter</string>
+    <string name="nik_validation">Minimal 16 digit</string>
+    <string name="noHp_validation">Minimal 11 digit</string>
     <string name="message_login">Sudah memiliki akun?</string>
     <string name="login_here">Masuk disini</string>
-    <string name="message_sign_up">Belum memiliki akun?</string>
-    <string name="register_here">Buat disini</string>
+    <string name="forgot_password">Lupa akun anda?</string>
+    <string name="call_admin">Hubungi Admin</string>
     <string name="fab_home">"FAB Logout "</string>
     <string name="logout_success">Logout Berhasil</string>
     <string name="login_success">Login Berhasil</string>
@@ -22,6 +24,7 @@
     <string name="signup_success">Berhasil mendaftarkan akun!</string>
     <string name="house_image">House Image</string>
     <string name="progress">Progress Pembangunan</string>
+    <string name="progressNew">Masukkan Progress Terbaru</string>
     <string name="role_admin">Admin</string>
     <string name="role_pegawai">Pegawai</string>
     <string name="role_konsumen">Konsumen</string>
@@ -29,13 +32,17 @@
     <string name="login_failed">Gagal Login</string>
     <string name="price">harga</string>
     <string name="NIK">NIK</string>
-    <string name="noTelp">No Telepon</string>
+    <string name="noTelp">No HP</string>
     <string name="pekerjaan">Pekerjaan</string>
     <string name="alamat">Alamat</string>
     <string name="logo_app">Logo App</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="logo_image">Logo Image</string>
+    <string name="select_here">Pilih disini</string>
+    <string name="dropdown_image">Dropdown Image</string>
+    <string name="success_update_status_pembangunan">Berhasil Update Data</string>
+    <string name="update_failed">Gagal Update Data</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
@@ -43,9 +50,23 @@
         <item>https://img.icons8.com/ios-filled/256/user-manual.png</item>
     </string-array>
 
+    <string-array name="data_photo_admin">
+        <item>https://cdn-icons-png.flaticon.com/256/2990/2990003.png</item>
+        <item>https://cdn-icons-png.flaticon.com/256/748/748137.png</item>
+        <item>https://cdn-icons-png.flaticon.com/256/2666/2666404.png</item>
+        <item>https://cdn-icons-png.flaticon.com/256/2990/2990003.png</item>
+    </string-array>
+
     <string-array name="data_home_konsumen">
         <item>Rumah Saya</item>
         <item>Hubungi Admin</item>
         <item>Panduan</item>
+    </string-array>
+
+    <string-array name="data_home_admin">
+        <item>Update Status Booking</item>
+        <item>Tambah Akun Baru</item>
+        <item>Kelola Akun Konsumen</item>
+        <item>Update Status Pembangunan</item>
     </string-array>
 </resources>

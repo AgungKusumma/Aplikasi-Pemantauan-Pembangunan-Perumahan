@@ -7,18 +7,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.main.detail.DetailActivity
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
-import java.util.*
+import com.capstoneproject.basnasejahtera.pengawas.UpdateStatusPembangunanActivity
 
-class ListDataRumahAdapter : RecyclerView.Adapter<ListDataRumahAdapter.ListViewHolder>() {
-
-    private var listDataRumah = ArrayList<DataRumahResponseItem>()
+class ListDataRumahPengawasAdapter :
+    RecyclerView.Adapter<ListDataRumahPengawasAdapter.ListViewHolder>() {
+    private var listDataRumahPengawas = ArrayList<DataRumahResponseItem>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setListRumah(data: List<DataRumahResponseItem>) {
-        listDataRumah.clear()
-        listDataRumah.addAll(data)
+    fun setListRumahPengawas(data: List<DataRumahResponseItem>) {
+        listDataRumahPengawas.clear()
+        listDataRumahPengawas.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -29,10 +28,10 @@ class ListDataRumahAdapter : RecyclerView.Adapter<ListDataRumahAdapter.ListViewH
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listDataRumah[position])
+        holder.bind(listDataRumahPengawas[position])
     }
 
-    override fun getItemCount(): Int = listDataRumah.size
+    override fun getItemCount(): Int = listDataRumahPengawas.size
 
     class ListViewHolder(private val binding: ItemRowDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -53,14 +52,15 @@ class ListDataRumahAdapter : RecyclerView.Adapter<ListDataRumahAdapter.ListViewH
                 }
 
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    val intent =
+                        Intent(itemView.context, UpdateStatusPembangunanActivity::class.java)
                     intent.putExtra("idRumah", dataRumah.id)
                     intent.putExtra("nomorRumah", dataRumah.nomorRumah)
+                    intent.putExtra("progress", dataRumah.progressPembangunan)
                     itemView.context.startActivity(intent)
                 }
             }
         }
-
     }
 
 }

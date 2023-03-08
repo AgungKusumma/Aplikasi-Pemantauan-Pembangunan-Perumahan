@@ -10,6 +10,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivitySplashScreenBinding
 import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.*
@@ -65,6 +66,9 @@ class SplashScreenActivity : AppCompatActivity() {
                 finish()
             } else if (user.isLogin && user.role == konsumen) {
                 startActivity(Intent(this, HomeKonsumenActivity::class.java))
+                finish()
+            } else if (user.isLogin && user.role == admin) {
+                startActivity(Intent(this, HomeAdminActivity::class.java))
                 finish()
             } else {
                 startActivity(Intent(this, WelcomeActivity::class.java))

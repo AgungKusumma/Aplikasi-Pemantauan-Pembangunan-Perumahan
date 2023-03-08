@@ -7,9 +7,42 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="28"
+        android:background="@drawable/background"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/down"
+            android:contentDescription="@string/dropdown_image" />
+    </RelativeLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="649dp"
         android:layout_gravity="center">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -19,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/emailEditTextLayout"
+            app:layout_constraintBottom_toTopOf="@+id/passwordEditTextLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,32 +69,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/passwordEditTextLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameEditTextLayout"
-            app:startIconDrawable="@drawable/ic_baseline_email_24">
-
-            <com.capstoneproject.basnasejahtera.customview.EmailEditText
-                android:id="@+id/emailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
@@ -69,10 +76,10 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/nikEditTextLayout"
+            app:layout_constraintBottom_toTopOf="@+id/noHPEditTextLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout"
+            app:layout_constraintTop_toBottomOf="@+id/nameEditTextLayout"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -89,30 +96,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nikEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/noHPEditTextLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout">
-
-            <com.capstoneproject.basnasejahtera.customview.NIKeditText
-                android:id="@+id/nikEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="1"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/NIK"
-                android:inputType="number"
-                android:maxLength="16" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/noHPEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
@@ -123,7 +106,7 @@
             app:layout_constraintBottom_toTopOf="@+id/alamatEditTextLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nikEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@id/passwordEditTextLayout">
 
             <com.capstoneproject.basnasejahtera.customview.NoHpEditText
                 android:id="@+id/noHPEditText"
@@ -133,7 +116,8 @@
                 android:fontFamily="@font/poppins"
                 android:hint="@string/noTelp"
                 android:inputType="number"
-                android:maxLength="13" />
+                android:maxLength="13"
+                tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

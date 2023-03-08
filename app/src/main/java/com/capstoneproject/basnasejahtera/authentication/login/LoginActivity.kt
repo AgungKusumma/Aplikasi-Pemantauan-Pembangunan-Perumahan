@@ -2,6 +2,7 @@ package com.capstoneproject.basnasejahtera.authentication.login
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,8 +15,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
+import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
-import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityLoginBinding
 import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.HomeActivity
@@ -122,6 +123,14 @@ class LoginActivity : AppCompatActivity() {
                                                     startActivity(intent)
                                                     finish()
                                                 }
+                                                admin -> {
+                                                    val intent = Intent(this@LoginActivity,
+                                                        HomeAdminActivity::class.java)
+                                                    intent.flags =
+                                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                                    startActivity(intent)
+                                                    finish()
+                                                }
                                                 else -> {
                                                     val intent = Intent(this@LoginActivity,
                                                         WelcomeActivity::class.java)
@@ -157,13 +166,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupAccount() {
         binding.apply {
-            registerTextView.setOnClickListener {
+            callAdminTextView.setOnClickListener {
                 emailEditTextLayout.error = null
                 passwordEditTextLayout.error = null
                 emailEditText.apply { text?.clear() }
                 passwordEditText.apply { text?.clear() }
 
-                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+                val number = "6281273783202"
+                val url = "https://api.whatsapp.com/send?phone=$number"
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(url)
                 startActivity(intent)
             }
         }

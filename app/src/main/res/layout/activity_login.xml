@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp">
 
         <ImageView
             android:id="@+id/ivApp"
@@ -89,38 +90,39 @@
             android:fontFamily="@font/poppins_bold"
             android:text="@string/login"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/haveAccountTextView"
+            app:layout_constraintBottom_toTopOf="@+id/forgotAccountTextView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
 
         <TextView
-            android:id="@+id/haveAccountTextView"
+            android:id="@+id/forgotAccountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/message_sign_up"
+            android:text="@string/forgot_password"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/registerTextView"
+            app:layout_constraintBottom_toTopOf="@+id/callAdminTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
         <TextView
-            android:id="@+id/registerTextView"
+            android:id="@+id/callAdminTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/register_here"
+            android:text="@string/call_admin"
             android:textColor="@color/blue"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/haveAccountTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/forgotAccountTextView" />
 
         <ProgressBar
             android:id="@+id/progressLoading"
@@ -133,5 +135,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/copyrightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="bottom"
+        android:text="@string/copyright"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </LinearLayout>
