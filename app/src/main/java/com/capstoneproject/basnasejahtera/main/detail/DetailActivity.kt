@@ -117,14 +117,14 @@ class DetailActivity : AppCompatActivity() {
                         binding.ivHouse.setBackgroundColor(Color.WHITE)
                     }
                 }
-            }
 
-            binding.progressBtn.setOnClickListener {
-                val intent = Intent(this, ProgressActivity::class.java)
-                intent.putExtra("nomorRumah", rumah.nomorRumah)
-                intent.putExtra("updatedAt", rumah.updatedAt)
-                intent.putExtra("progress", rumah.progressPembangunan)
-                startActivity(intent)
+                progressBtn.setOnClickListener {
+                    val intent = Intent(this@DetailActivity, ProgressActivity::class.java)
+                    intent.putExtra("nomorRumah", rumah.nomorRumah)
+                    intent.putExtra("updatedAt", rumah.updatedAt)
+                    intent.putExtra("progress", rumah.progressPembangunan)
+                    startActivity(intent)
+                }
             }
         }
     }
