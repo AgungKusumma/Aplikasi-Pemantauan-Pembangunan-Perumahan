@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.konsumen
+package com.capstoneproject.basnasejahtera.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityHomeKonsumenBinding
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.adapter.ListHomeKonsumenAdapter
+import com.capstoneproject.basnasejahtera.main.adapter.ListHomeAdminAdapter
 import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.ItemData
@@ -18,10 +18,10 @@ import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeKonsumenActivity : AppCompatActivity() {
+class HomeAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeKonsumenBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: ListHomeKonsumenAdapter
+    private lateinit var adapter: ListHomeAdminAdapter
     private var list = ArrayList<ItemData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +40,10 @@ class HomeKonsumenActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[MainViewModel::class.java]
 
-        val konsumen = getString(R.string.role_konsumen)
+        val admin = getString(R.string.role_admin)
 
         mainViewModel.getUser().observe(this) { user ->
-            if (!user.isLogin || user.role != konsumen) {
+            if (!user.isLogin || user.role != admin) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
@@ -64,10 +64,10 @@ class HomeKonsumenActivity : AppCompatActivity() {
     private fun showRecyclerList() {
         list.addAll(listData)
 
-        adapter = ListHomeKonsumenAdapter(list)
+        adapter = ListHomeAdminAdapter(list)
 
         binding.apply {
-            rvItemHouse.layoutManager = GridLayoutManager(this@HomeKonsumenActivity, 2)
+            rvItemHouse.layoutManager = GridLayoutManager(this@HomeAdminActivity, 2)
             rvItemHouse.setHasFixedSize(true)
             rvItemHouse.adapter = adapter
         }
@@ -75,8 +75,8 @@ class HomeKonsumenActivity : AppCompatActivity() {
 
     private val listData: ArrayList<ItemData>
         get() {
-            val dataPhoto = resources.getStringArray(R.array.data_photo)
-            val dataKonsumen = resources.getStringArray(R.array.data_home_konsumen)
+            val dataPhoto = resources.getStringArray(R.array.data_photo_admin)
+            val dataKonsumen = resources.getStringArray(R.array.data_home_admin)
             val listData = ArrayList<ItemData>()
             for (i in dataKonsumen.indices) {
                 val data = ItemData(dataPhoto[i], dataKonsumen[i])
@@ -88,7 +88,7 @@ class HomeKonsumenActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.fabLogout.setOnClickListener {
             mainViewModel.logout()
-            Toast.makeText(this@HomeKonsumenActivity,
+            Toast.makeText(this@HomeAdminActivity,
                 getString(R.string.logout_success), Toast.LENGTH_LONG).show()
         }
     }

@@ -17,15 +17,23 @@ class UserRepository private constructor(
         return apiService.userLogin(user)
     }
 
-//    fun userRegister(name: String, email: String, password: String): Call<FileUploadResponse> {
-//        val user: Map<String, String> = mapOf(
-//            "name" to name,
-//            "email" to email,
-//            "password" to password
-//        )
-//
-//        return apiService.userRegister(user)
-//    }
+    fun userRegister(
+        email: String, kataSandi: String, nama: String, noHp: String,
+        role: String, nik: String, pekerjaan: String, alamat: String,
+    ): Call<UserModel> {
+        val user: Map<String, String> = mapOf(
+            "email" to email,
+            "kataSandi" to kataSandi,
+            "nama" to nama,
+            "noHp" to noHp,
+            "role" to role,
+            "nik" to nik,
+            "pekerjaan" to pekerjaan,
+            "alamat" to alamat,
+        )
+
+        return apiService.userRegister(user)
+    }
 
     fun getBlok(): Call<List<DataBlokRumahResponseItem>> {
         return apiService.getBlok()
@@ -45,6 +53,13 @@ class UserRepository private constructor(
 
     fun getDetailDataRumahKonsumen(id: Int): Call<DetailDataRumahResponse> {
         return apiService.getDetailRumahKonsumen(id)
+    }
+
+    fun updateStatusPembangunan(
+        idRumah: Int,
+        statusPembangunan: DataStatus,
+    ): Call<DataUpdateResponse> {
+        return apiService.updateStatusPembangunan(idRumah, statusPembangunan)
     }
 
     companion object {

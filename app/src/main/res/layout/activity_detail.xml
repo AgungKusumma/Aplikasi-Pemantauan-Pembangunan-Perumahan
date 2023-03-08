@@ -12,10 +12,10 @@
         android:layout_height="250dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/house_image"
+        android:src="@drawable/house"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/house" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvBlok"
@@ -39,6 +39,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/tvPrice"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +56,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/tvProgress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +70,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/tvNIK"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,10 +85,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/tvTelp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +105,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/tvPekerjaan"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,6 +121,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@id/tvAlamat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,37 +137,28 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintBottom_toTopOf="@+id/progressBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPekerjaan"
         tools:text="@string/alamat" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/CircularDeterminateProgressBar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <Button
+        android:id="@+id/progressBtn"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/btn_progress"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAlamat"
-        tools:progress="60" />
-
-    <TextView
-        android:id="@+id/text_view_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        tools:text="60%" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAlamat" />
 
     <ProgressBar
         android:id="@+id/progressLoading"

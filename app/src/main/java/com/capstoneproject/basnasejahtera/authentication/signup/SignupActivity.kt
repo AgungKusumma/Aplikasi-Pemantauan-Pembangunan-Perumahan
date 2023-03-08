@@ -2,10 +2,7 @@ package com.capstoneproject.basnasejahtera.authentication.signup
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -13,7 +10,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.authentication.login.LoginActivity
+import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
+import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.databinding.ActivitySignupBinding
 import com.capstoneproject.basnasejahtera.model.UserModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
@@ -24,29 +22,15 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var signupViewModel: SignupViewModel
+    private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
         setupViewModel()
         setupAction()
-        setupAccount()
-    }
-
-    private fun setupView() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 
     private fun setupViewModel() {
@@ -54,17 +38,23 @@ class SignupActivity : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[SignupViewModel::class.java]
+
+        authenticationViewModel = AuthenticationViewModel.getInstance(this)
     }
 
     private fun setupAction() {
-        binding.signupButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
+            val nik = binding.nikEditText.text.toString()
+            val noHp = binding.noHPEditText.text.toString()
+            val alamat = binding.alamatEditText.text.toString()
+            val pekerjaan = binding.pekerjaanEditText.text.toString()
 
             when {
                 name.isEmpty() -> {
-                    binding.nameEditTextLayout.error = "Masukkan email"
+                    binding.nameEditTextLayout.error = "Masukkan Nama"
                 }
                 email.isEmpty() -> {
                     binding.emailEditTextLayout.error = "Masukkan email"
@@ -72,23 +62,47 @@ class SignupActivity : AppCompatActivity() {
                 password.isEmpty() -> {
                     binding.passwordEditTextLayout.error = "Masukkan password"
                 }
+                nik.isEmpty() -> {
+                    binding.nikEditTextLayout.error = "Masukkan NIK"
+                }
+                noHp.isEmpty() -> {
+                    binding.noHPEditTextLayout.error = "Masukkan No HP"
+                }
+                alamat.isEmpty() -> {
+                    binding.alamatEditTextLayout.error = "Masukkan Alamat"
+                }
+                pekerjaan.isEmpty() -> {
+                    binding.pekerjaanEditTextLayout.error = "Masukkan Pekerjaan"
+                }
                 else -> {
-                    signupViewModel.saveUser(UserModel(name, email, password, "role",false))
-                    Toast.makeText(this,
-                        getString(R.string.signup_success),
-                        Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    signupViewModel.saveUser(UserModel(name, email, password, "role", false))
+
+                    authenticationViewModel.userRegister(email,
+                        password,
+                        name,
+                        noHp,
+                        "Konsumen",
+                        nik,
+                        pekerjaan,
+                        alamat)
+                    authenticationViewModel.error.observe(this@SignupActivity) { event ->
+                        event.getContentIfNotHandled()?.let { error ->
+                            if (!error) {
+                                Toast.makeText(this,
+                                    getString(R.string.signup_success),
+                                    Toast.LENGTH_LONG).show()
+                                val intent = Intent(this, HomeAdminActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this,
+                                    getString(R.string.signup_failed),
+                                    Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
                 }
             }
-        }
-    }
-
-    private fun setupAccount() {
-        binding.loginTextView.setOnClickListener {
-            val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-            startActivity(intent)
         }
     }
 

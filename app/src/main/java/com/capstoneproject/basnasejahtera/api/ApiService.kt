@@ -1,17 +1,14 @@
 package com.capstoneproject.basnasejahtera.api
 
-import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
-import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
-import com.capstoneproject.basnasejahtera.model.DetailDataRumahResponse
-import com.capstoneproject.basnasejahtera.model.UserModel
+import com.capstoneproject.basnasejahtera.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-//    @POST("register")
-//    fun userRegister(
-//        @Body user: Map<String, String>,
-//    ): Call<UserModel>
+    @POST("register")
+    fun userRegister(
+        @Body user: Map<String, String>,
+    ): Call<UserModel>
 
     @POST("login")
     fun userLogin(
@@ -38,4 +35,10 @@ interface ApiService {
     fun getDetailRumahKonsumen(
         @Path("idKonsumen") id: Int,
     ): Call<DetailDataRumahResponse>
+
+    @POST("rumah/status-pembangunan/{idRumah}/")
+    fun updateStatusPembangunan(
+        @Path("idRumah") idRumah: Int,
+        @Body statusPembangunan: DataStatus,
+    ): Call<DataUpdateResponse>
 }

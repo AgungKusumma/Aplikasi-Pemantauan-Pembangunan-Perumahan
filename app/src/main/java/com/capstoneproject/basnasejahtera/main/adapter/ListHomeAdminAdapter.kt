@@ -1,21 +1,20 @@
 package com.capstoneproject.basnasejahtera.main.adapter
 
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
+import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.konsumen.DetailKonsumenActivity
-import com.capstoneproject.basnasejahtera.konsumen.PanduanActivity
+import com.capstoneproject.basnasejahtera.konsumen.KelolaAkunKonsumenActivity
 import com.capstoneproject.basnasejahtera.model.ItemData
+import com.capstoneproject.basnasejahtera.pengawas.MainPengawasActivity
 
-class ListHomeKonsumenAdapter(private val listData: ArrayList<ItemData>) :
-    RecyclerView.Adapter<ListHomeKonsumenAdapter.ListViewHolder>() {
+class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
+    RecyclerView.Adapter<ListHomeAdminAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view =
@@ -42,35 +41,44 @@ class ListHomeKonsumenAdapter(private val listData: ArrayList<ItemData>) :
                 tvItemBlok.text = data
 
                 when (data) {
-                    "Rumah Saya" -> {
-                        binding.root.setBackgroundColor(Color.GREEN)
-                    }
-                    "Hubungi Admin" -> {
+                    "Update Status Booking" -> {
                         binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_100))
                     }
-                    "Panduan" -> {
+                    "Tambah Akun Baru" -> {
                         binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_50))
+                    }
+                    "Kelola Akun Konsumen" -> {
+                        binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                            R.color.blue_50))
+                    }
+                    "Update Status Pembangunan" -> {
+                        binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                            R.color.blue_100))
                     }
                 }
 
                 itemView.setOnClickListener {
                     when (data) {
-                        "Rumah Saya" -> {
+                        "Update Status Booking" -> {
+//                            val intent =
+//                                Intent(itemView.context, DetailKonsumenActivity::class.java)
+//                            itemView.context.startActivity(intent)
+                        }
+                        "Tambah Akun Baru" -> {
                             val intent =
-                                Intent(itemView.context, DetailKonsumenActivity::class.java)
+                                Intent(itemView.context, SignupActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
-                        "Hubungi Admin" -> {
-                            val number = "6281273783202"
-                            val url = "https://api.whatsapp.com/send?phone=$number"
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse(url)
+                        "Kelola Akun Konsumen" -> {
+                            val intent =
+                                Intent(itemView.context, KelolaAkunKonsumenActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
-                        "Panduan" -> {
-                            val intent = Intent(itemView.context, PanduanActivity::class.java)
+                        "Update Status Pembangunan" -> {
+                            val intent =
+                                Intent(itemView.context, MainPengawasActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
                     }

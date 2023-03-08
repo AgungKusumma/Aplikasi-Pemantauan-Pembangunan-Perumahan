@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailBinding
+import com.capstoneproject.basnasejahtera.main.ProgressActivity
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
@@ -82,26 +83,28 @@ class DetailActivity : AppCompatActivity() {
             val nf: NumberFormat = NumberFormat.getInstance(localeID)
             val price = nf.format(rumah.harga)
 
+            val nik = rumah.dataKonsumen?.nik
+            val noTelp = rumah.dataKonsumen?.noTelp
+            val pekerjaan = rumah.dataKonsumen?.pekerjaan
+            val alamat = rumah.dataKonsumen?.alamat
+
             binding.apply {
                 "Blok $nomorRumah".also { tvBlok.text = it }
-                "Tipe Rumah ${rumah.tipeRumah}".also { tvName.text = it }
+                "Tipe Rumah : ${rumah.tipeRumah}".also { tvName.text = it }
                 "Harga Rumah : Rp. $price".also { tvPrice.text = it }
                 "Progress Pembangunan : ${rumah.progressPembangunan}%".also { tvProgress.text = it }
 
-                if (rumah.nik == null && rumah.noTelp == null && rumah.pekerjaan == null && rumah.alamat == null) {
+                if (nik == null && noTelp == null && pekerjaan == null && alamat == null) {
                     "NIK : -".also { tvNIK.text = it }
                     "No Telp : -".also { tvTelp.text = it }
                     "Pekerjaan : -".also { tvPekerjaan.text = it }
                     "Alamat : -".also { tvAlamat.text = it }
                 } else {
-                    "NIK : ${rumah.nik}".also { tvNIK.text = it }
-                    "No Telp : ${rumah.noTelp}".also { tvTelp.text = it }
-                    "Pekerjaan : ${rumah.pekerjaan}".also { tvPekerjaan.text = it }
-                    "Alamat : ${rumah.alamat}".also { tvAlamat.text = it }
+                    "NIK : $nik".also { tvNIK.text = it }
+                    "No Telp : $noTelp".also { tvTelp.text = it }
+                    "Pekerjaan : $pekerjaan".also { tvPekerjaan.text = it }
+                    "Alamat : $alamat".also { tvAlamat.text = it }
                 }
-
-                progressBar.progress = rumah.progressPembangunan
-                "${rumah.progressPembangunan}%".also { textViewProgress.text = it }
 
                 when (rumah.statusRumah) {
                     "terjual" -> {
@@ -114,6 +117,14 @@ class DetailActivity : AppCompatActivity() {
                         binding.ivHouse.setBackgroundColor(Color.WHITE)
                     }
                 }
+            }
+
+            binding.progressBtn.setOnClickListener {
+                val intent = Intent(this, ProgressActivity::class.java)
+                intent.putExtra("nomorRumah", rumah.nomorRumah)
+                intent.putExtra("updatedAt", rumah.updatedAt)
+                intent.putExtra("progress", rumah.progressPembangunan)
+                startActivity(intent)
             }
         }
     }

@@ -55,30 +55,34 @@ class AuthenticationViewModel(private val userRepository: UserRepository) : View
         })
     }
 
-//    fun userRegister(name: String, email: String, password: String) {
-//        val client = userRepository.userRegister(name, email, password)
-//        client.enqueue(object : Callback<FileUploadResponse> {
-//            override fun onResponse(
-//                call: Call<FileUploadResponse>,
-//                response: Response<FileUploadResponse>,
-//            ) {
-//                Log.e(SIGNUP, "onResponse: " + response.body())
-//                if (response.isSuccessful) {
-//                    _error.value = Event(false)
-//                } else {
-//                    Log.e(SIGNUP, "onResponse fail: ")
-//                    _message.value = Event(response.message())
-//                    _error.value = Event(true)
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<FileUploadResponse>, t: Throwable) {
-//                Log.e(SIGNUP, "onFailure: " + t.message)
-//                _message.value = Event(t.message.toString())
-//                _error.value = Event(true)
-//            }
-//        })
-//    }
+    fun userRegister(
+        email: String, kataSandi: String, nama: String, noHp: String,
+        role: String, nik: String, pekerjaan: String, alamat: String,
+    ) {
+        val client =
+            userRepository.userRegister(email, kataSandi, nama, noHp, role, nik, pekerjaan, alamat)
+        client.enqueue(object : Callback<UserModel> {
+            override fun onResponse(
+                call: Call<UserModel>,
+                response: Response<UserModel>,
+            ) {
+                Log.e(SIGNUP, "onResponse: " + response.body())
+                if (response.isSuccessful) {
+                    _error.value = Event(false)
+                } else {
+                    Log.e(SIGNUP, "onResponse fail: ")
+                    _message.value = Event(response.message())
+                    _error.value = Event(true)
+                }
+            }
+
+            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                Log.e(SIGNUP, "onFailure: " + t.message)
+                _message.value = Event(t.message.toString())
+                _error.value = Event(true)
+            }
+        })
+    }
 
     companion object {
         private const val LOGIN = "LoginViewModel"
