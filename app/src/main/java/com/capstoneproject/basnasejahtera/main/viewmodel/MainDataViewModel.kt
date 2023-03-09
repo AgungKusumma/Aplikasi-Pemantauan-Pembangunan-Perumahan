@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
+import com.capstoneproject.basnasejahtera.model.DataKonsumenResponseItem
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
 import com.capstoneproject.basnasejahtera.model.UserRepository
 import com.capstoneproject.basnasejahtera.utils.Event
@@ -18,6 +19,9 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
 
     private var _dataRumah = MutableLiveData<List<DataRumahResponseItem>>()
     val dataRumah: LiveData<List<DataRumahResponseItem>> = _dataRumah
+
+    private var _dataKonsumen = MutableLiveData<List<DataKonsumenResponseItem>>()
+    val dataKonsumen: LiveData<List<DataKonsumenResponseItem>> = _dataKonsumen
 
     private var _dataBlok = MutableLiveData<List<DataBlokRumahResponseItem>>()
     val dataBlok: LiveData<List<DataBlokRumahResponseItem>> = _dataBlok
@@ -81,6 +85,36 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
 
             override fun onFailure(
                 call: Call<List<DataRumahResponseItem>>,
+                t: Throwable,
+            ) {
+                Log.e(TAG, "onFailure: " + t.message)
+                _isLoading.value = false
+                _message.value = Event(t.message.toString())
+            }
+        })
+    }
+
+    fun getAllDataKonsumen() {
+        _isLoading.value = true
+        val client = userRepository.getAllDataKonsumen()
+        client.enqueue(object : Callback<List<DataKonsumenResponseItem>> {
+            override fun onResponse(
+                call: Call<List<DataKonsumenResponseItem>>,
+                response: Response<List<DataKonsumenResponseItem>>,
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    userRepository.appExecutors.networkIO.execute {
+                        _dataKonsumen.postValue(response.body()!!)
+                    }
+                } else {
+                    Log.e(TAG, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                }
+            }
+
+            override fun onFailure(
+                call: Call<List<DataKonsumenResponseItem>>,
                 t: Throwable,
             ) {
                 Log.e(TAG, "onFailure: " + t.message)

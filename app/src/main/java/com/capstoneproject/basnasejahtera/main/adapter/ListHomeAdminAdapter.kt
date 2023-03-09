@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
+import com.capstoneproject.basnasejahtera.admin.DataRumahAdminActivity
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.konsumen.KelolaAkunKonsumenActivity
@@ -62,9 +63,9 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                 itemView.setOnClickListener {
                     when (data) {
                         "Update Status Booking" -> {
-//                            val intent =
-//                                Intent(itemView.context, DetailKonsumenActivity::class.java)
-//                            itemView.context.startActivity(intent)
+                            val intent =
+                                Intent(itemView.context, DataRumahAdminActivity::class.java)
+                            itemView.context.startActivity(intent)
                         }
                         "Tambah Akun Baru" -> {
                             val intent =

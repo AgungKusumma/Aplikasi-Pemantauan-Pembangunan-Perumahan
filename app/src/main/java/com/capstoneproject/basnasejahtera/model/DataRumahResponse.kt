@@ -26,6 +26,9 @@ data class DataRumahResponseItem(
 
     @field:SerializedName("id_blok")
     val idBlok: Int,
+
+    @field:SerializedName("dataBooking")
+    val dataBooking: DataBookingRumah? = null,
 ) : Parcelable
 
 @Parcelize

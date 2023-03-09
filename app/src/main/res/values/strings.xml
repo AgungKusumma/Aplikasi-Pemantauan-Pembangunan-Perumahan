@@ -23,6 +23,7 @@
     <string name="data_name">Blok Rumah</string>
     <string name="signup_success">Berhasil mendaftarkan akun!</string>
     <string name="house_image">House Image</string>
+    <string name="user_image">User Image</string>
     <string name="progress">Progress Pembangunan</string>
     <string name="progressNew">Masukkan Progress Terbaru</string>
     <string name="role_admin">Admin</string>
@@ -52,7 +53,14 @@
     <string name="signup_failed">Akun sudah ada</string>
     <string name="status_rumah">Status Rumah</string>
     <string name="booking_nominal">Nominal Booking</string>
+    <string name="booking_nominal_new">Masukkan Nominal Booking</string>
     <string name="booking_date">Tanggal Booking</string>
+    <string name="status_terjual">terjual</string>
+    <string name="status_diBooking">di booking</string>
+    <string name="status_belumTerjual">belum terjual</string>
+    <string name="change_status_rumah">Ubah Status Rumah</string>
+    <string name="select_new_status_rumah">Pilih Status Rumah yang terbaru</string>
+    <string name="select_konsumen">Pilih Akun Konsumen</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>

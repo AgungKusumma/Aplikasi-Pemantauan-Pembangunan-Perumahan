@@ -27,3 +27,18 @@ data class DataStatus(
     @field:SerializedName("statusPembangunan")
     val statusPembangunan: Int,
 ) : Parcelable
+
+@Parcelize
+data class DataUpdateBooking(
+    @field:SerializedName("idKonsumen")
+    val idKonsumen: Int,
+
+    @field:SerializedName("statusBooking")
+    val statusBooking: String,
+
+    @field:SerializedName("nominalBooking")
+    val nominalBooking: Int,
+
+    @field:SerializedName("tanggalBooking")
+    val tanggalBooking: String,
+) : Parcelable
