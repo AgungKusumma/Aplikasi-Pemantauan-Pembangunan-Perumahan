@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.pengawas
+package com.capstoneproject.basnasejahtera.admin
 
 import android.content.Intent
 import android.os.Build
@@ -10,24 +10,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.databinding.ActivityMainBinding
+import com.capstoneproject.basnasejahtera.databinding.ActivityDataRumahAdminBinding
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataRumahPengawasAdapter
+import com.capstoneproject.basnasejahtera.main.adapter.ListDataRumahAdminAdapter
 import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-class MainPengawasActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class DataRumahAdminActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDataRumahAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
-    private lateinit var adapter: ListDataRumahPengawasAdapter
+    private lateinit var adapter: ListDataRumahAdminAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityDataRumahAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
@@ -67,10 +67,10 @@ class MainPengawasActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        adapter = ListDataRumahPengawasAdapter()
+        adapter = ListDataRumahAdminAdapter()
 
         binding.apply {
-            rvItemHouse.layoutManager = GridLayoutManager(this@MainPengawasActivity, 2)
+            rvItemHouse.layoutManager = GridLayoutManager(this@DataRumahAdminActivity, 2)
             rvItemHouse.setHasFixedSize(true)
             rvItemHouse.adapter = adapter
         }
@@ -82,7 +82,7 @@ class MainPengawasActivity : AppCompatActivity() {
         }
 
         mainDataViewModel.dataRumah.observe(this) {
-            adapter.setListRumahPengawas(it)
+            adapter.setListRumahAdmin(it)
         }
 
         mainDataViewModel.error.observe(this) { event ->

@@ -42,6 +42,12 @@ interface ApiService {
         @Body statusPembangunan: DataStatus,
     ): Call<DataUpdateResponse>
 
+    @POST("rumah/status/{idRumah}/")
+    fun updateStatusBooking(
+        @Path("idRumah") idRumah: Int,
+        @Body statusBooking: DataUpdateBooking,
+    ): Call<DataUpdateResponse>
+
     @GET("kustomer")
-    fun getAllDataKonsumen(): Call<List<DataRumahResponseItem>>
+    fun getAllDataKonsumen(): Call<List<DataKonsumenResponseItem>>
 }

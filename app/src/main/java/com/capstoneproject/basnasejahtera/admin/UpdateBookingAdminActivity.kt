@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.pengawas
+package com.capstoneproject.basnasejahtera.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,23 +6,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
-import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateStatusPembangunanBinding
+import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateBookingAdminBinding
 import com.capstoneproject.basnasejahtera.main.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
-import com.capstoneproject.basnasejahtera.model.DataStatus
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
+import com.capstoneproject.basnasejahtera.pengawas.UpdateStatusViewModel
 
-class UpdateStatusPembangunanActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityUpdateStatusPembangunanBinding
+class UpdateBookingAdminActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityUpdateBookingAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var updateStatusViewModel: UpdateStatusViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUpdateStatusPembangunanBinding.inflate(layoutInflater)
+        binding = ActivityUpdateBookingAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupViewModel()
@@ -50,34 +49,37 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
 
     private fun setupData() {
         val nomorRumah = intent.getStringExtra("nomorRumah")
-        val progressPembangunan = intent.getIntExtra("progress", 0)
+        val statusBooking = intent.getStringExtra("statusBooking")
+        val tanggalBooking = intent.getStringExtra("tanggalBooking")
 
         "Nomor Rumah : $nomorRumah".also { binding.tvNomorRumah.text = it }
-        "Progress Pembangunan saat ini : $progressPembangunan%".also {
-            binding.tvProgress.text = it
-        }
+        "Nama Konsumen : $nomorRumah".also { binding.tvNama.text = it }
+        "Status Rumah : $nomorRumah".also { binding.tvStatusBooking.text = it }
     }
 
     private fun setupAction() {
         val idRumah = intent.getIntExtra("idRumah", 0)
-        val progress = binding.statusPembangunanEditText.text
+        val idKonsumen = intent.getIntExtra("idKonsumen", 0)
+//        val progress = binding.statusPembangunanEditText.text
 
         binding.apply {
             saveButton.setOnClickListener {
-                val progress1 = progress.toString().toInt()
-                val data = DataStatus(progress1)
+//                val data = DataUpdateBooking(idKonsumen,
+//                    newStatusBooking.toString(),
+//                    nominalBooking!!,
+//                    tanggalBooking!!)
 
-                updateStatusViewModel.updateStatusPembangunan(idRumah, data)
-                updateStatusViewModel.error.observe(this@UpdateStatusPembangunanActivity) { event ->
+//                updateStatusViewModel.updateStatusBooking(idRumah, data)
+                updateStatusViewModel.error.observe(this@UpdateBookingAdminActivity) { event ->
                     event.getContentIfNotHandled()?.let { error ->
                         if (!error) {
-                            updateStatusViewModel.data.observe(this@UpdateStatusPembangunanActivity) { event ->
+                            updateStatusViewModel.data.observe(this@UpdateBookingAdminActivity) { event ->
                                 event.getContentIfNotHandled()?.let {
-                                    Toast.makeText(this@UpdateStatusPembangunanActivity,
+                                    Toast.makeText(this@UpdateBookingAdminActivity,
                                         getString(R.string.success_update_status_pembangunan),
                                         Toast.LENGTH_LONG).show()
                                     val intent =
-                                        Intent(this@UpdateStatusPembangunanActivity,
+                                        Intent(this@UpdateBookingAdminActivity,
                                             HomeAdminActivity::class.java)
                                     intent.flags =
                                         Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -86,7 +88,7 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
                                 }
                             }
                         } else {
-                            Toast.makeText(this@UpdateStatusPembangunanActivity,
+                            Toast.makeText(this@UpdateBookingAdminActivity,
                                 getString(R.string.update_failed),
                                 Toast.LENGTH_LONG).show()
                         }
