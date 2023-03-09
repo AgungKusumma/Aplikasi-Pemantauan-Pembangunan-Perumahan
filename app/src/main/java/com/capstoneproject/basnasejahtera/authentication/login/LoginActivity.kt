@@ -25,6 +25,7 @@ import com.capstoneproject.basnasejahtera.model.DataKonsumen
 import com.capstoneproject.basnasejahtera.model.UserModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
+import com.capstoneproject.basnasejahtera.pengawas.HomePengawasActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -80,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
         val pegawai = getString(R.string.role_pegawai)
         val konsumen = getString(R.string.role_konsumen)
         val admin = getString(R.string.role_admin)
+        val pengawas = getString(R.string.role_pengawas)
 
         binding.apply {
             loginButton.setOnClickListener {
@@ -126,6 +128,14 @@ class LoginActivity : AppCompatActivity() {
                                                 admin -> {
                                                     val intent = Intent(this@LoginActivity,
                                                         HomeAdminActivity::class.java)
+                                                    intent.flags =
+                                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                                    startActivity(intent)
+                                                    finish()
+                                                }
+                                                pengawas -> {
+                                                    val intent = Intent(this@LoginActivity,
+                                                        HomePengawasActivity::class.java)
                                                     intent.flags =
                                                         Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                                     startActivity(intent)

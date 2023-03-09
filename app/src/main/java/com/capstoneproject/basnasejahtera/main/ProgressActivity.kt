@@ -9,7 +9,6 @@ import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-
 class ProgressActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProgressBinding
     private lateinit var mainViewModel: MainViewModel

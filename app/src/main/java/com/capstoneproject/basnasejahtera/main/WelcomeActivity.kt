@@ -13,8 +13,6 @@ import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-//private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityWelcomeBinding
