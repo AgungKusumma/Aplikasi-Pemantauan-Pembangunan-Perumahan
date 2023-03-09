@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailBinding
@@ -68,7 +69,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupData() {
         val idRumah = intent.getIntExtra("idRumah", 0)
-        val nomorRumah = intent.getStringExtra("nomorRumah")
 
         mainViewModel.getUser().observe(this) {
             detailDataViewModel.getDataRumah(idRumah)
@@ -83,27 +83,51 @@ class DetailActivity : AppCompatActivity() {
             val nf: NumberFormat = NumberFormat.getInstance(localeID)
             val price = nf.format(rumah.harga)
 
+            val nama = rumah.dataAkunKonsumen?.nama
             val nik = rumah.dataKonsumen?.nik
             val noTelp = rumah.dataKonsumen?.noTelp
             val pekerjaan = rumah.dataKonsumen?.pekerjaan
             val alamat = rumah.dataKonsumen?.alamat
+            val nominalBooking = rumah.dataBooking?.nominalBooking
+            val tglBooking = rumah.dataBooking?.tanggalBooking
 
             binding.apply {
-                "Blok $nomorRumah".also { tvBlok.text = it }
-                "Tipe Rumah : ${rumah.tipeRumah}".also { tvName.text = it }
+                "Blok ${rumah.nomorRumah}".also { tvBlok.text = it }
+                "Tipe Rumah : ${rumah.tipeRumah}".also { tvTipeRumah.text = it }
                 "Harga Rumah : Rp. $price".also { tvPrice.text = it }
                 "Progress Pembangunan : ${rumah.progressPembangunan}%".also { tvProgress.text = it }
+                "Status Rumah : ${rumah.statusRumah}".also { tvStatusBooking.text = it }
 
-                if (nik == null && noTelp == null && pekerjaan == null && alamat == null) {
-                    "NIK : -".also { tvNIK.text = it }
-                    "No Telp : -".also { tvTelp.text = it }
-                    "Pekerjaan : -".also { tvPekerjaan.text = it }
-                    "Alamat : -".also { tvAlamat.text = it }
+                if (rumah.dataBooking != null) {
+                    val bookingPrice = nf.format(nominalBooking)
+                    tvNominal.isVisible = true
+                    tvTanggal.isVisible = true
+
+                    "Nominal Booking : Rp.$bookingPrice".also { tvNominal.text = it }
+                    "Tanggal Booking : $tglBooking".also { tvTanggal.text = it }
                 } else {
+                    tvNominal.isVisible = false
+                    tvTanggal.isVisible = false
+                }
+
+                if (rumah.dataKonsumen != null) {
+                    tvNama.isVisible = true
+                    tvNIK.isVisible = true
+                    tvTelp.isVisible = true
+                    tvPekerjaan.isVisible = true
+                    tvAlamat.isVisible = true
+
+                    "Nama Pemilik : $nama".also { tvNama.text = it }
                     "NIK : $nik".also { tvNIK.text = it }
                     "No Telp : $noTelp".also { tvTelp.text = it }
                     "Pekerjaan : $pekerjaan".also { tvPekerjaan.text = it }
                     "Alamat : $alamat".also { tvAlamat.text = it }
+                } else {
+                    tvNama.isVisible = false
+                    tvNIK.isVisible = false
+                    tvTelp.isVisible = false
+                    tvPekerjaan.isVisible = false
+                    tvAlamat.isVisible = false
                 }
 
                 when (rumah.statusRumah) {

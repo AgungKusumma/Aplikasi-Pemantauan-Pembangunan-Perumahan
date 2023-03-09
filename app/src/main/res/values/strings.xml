@@ -30,6 +30,7 @@
     <string name="role_konsumen">Konsumen</string>
     <string name="wrong_password_and_email">Email atau kata sandi salah</string>
     <string name="login_failed">Gagal Login</string>
+    <string name="tipe_rumah">Tipe Rumah</string>
     <string name="price">harga</string>
     <string name="NIK">NIK</string>
     <string name="noTelp">No HP</string>
@@ -49,6 +50,9 @@
     <string name="detail_progress">Detail Progress Pembangunan :</string>
     <string name="btn_progress">Lihat Progress Pembangunan</string>
     <string name="signup_failed">Akun sudah ada</string>
+    <string name="status_rumah">Status Rumah</string>
+    <string name="booking_nominal">Nominal Booking</string>
+    <string name="booking_date">Tanggal Booking</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>

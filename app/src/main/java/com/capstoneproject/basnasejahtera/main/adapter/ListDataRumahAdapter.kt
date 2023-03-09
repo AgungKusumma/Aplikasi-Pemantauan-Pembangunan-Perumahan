@@ -55,7 +55,6 @@ class ListDataRumahAdapter : RecyclerView.Adapter<ListDataRumahAdapter.ListViewH
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra("idRumah", dataRumah.id)
-                    intent.putExtra("nomorRumah", dataRumah.nomorRumah)
                     itemView.context.startActivity(intent)
                 }
             }
