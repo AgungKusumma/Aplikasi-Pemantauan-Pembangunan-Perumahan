@@ -12,7 +12,6 @@ import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.konsumen.KelolaAkunKonsumenActivity
 import com.capstoneproject.basnasejahtera.model.ItemData
-import com.capstoneproject.basnasejahtera.pengawas.MainPengawasActivity
 
 class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
     RecyclerView.Adapter<ListHomeAdminAdapter.ListViewHolder>() {
@@ -54,10 +53,6 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                         binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_50))
                     }
-                    "Update Status Pembangunan" -> {
-                        binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
-                            R.color.blue_100))
-                    }
                 }
 
                 itemView.setOnClickListener {
@@ -75,11 +70,6 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                         "Kelola Akun Konsumen" -> {
                             val intent =
                                 Intent(itemView.context, KelolaAkunKonsumenActivity::class.java)
-                            itemView.context.startActivity(intent)
-                        }
-                        "Update Status Pembangunan" -> {
-                            val intent =
-                                Intent(itemView.context, MainPengawasActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
                     }

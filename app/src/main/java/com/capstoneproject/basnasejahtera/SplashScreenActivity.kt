@@ -17,6 +17,7 @@ import com.capstoneproject.basnasejahtera.main.*
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
+import com.capstoneproject.basnasejahtera.pengawas.HomePengawasActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
@@ -59,6 +60,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val pegawai = getString(R.string.role_pegawai)
         val konsumen = getString(R.string.role_konsumen)
         val admin = getString(R.string.role_admin)
+        val pengawas = getString(R.string.role_pengawas)
 
         mainViewModel.getUser().observe(this) { user ->
             if (user.isLogin && user.role == pegawai) {
@@ -69,6 +71,9 @@ class SplashScreenActivity : AppCompatActivity() {
                 finish()
             } else if (user.isLogin && user.role == admin) {
                 startActivity(Intent(this, HomeAdminActivity::class.java))
+                finish()
+            } else if (user.isLogin && user.role == pengawas) {
+                startActivity(Intent(this, HomePengawasActivity::class.java))
                 finish()
             } else {
                 startActivity(Intent(this, WelcomeActivity::class.java))

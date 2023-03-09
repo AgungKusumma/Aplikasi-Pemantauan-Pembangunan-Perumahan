@@ -56,10 +56,10 @@ class MainPengawasActivity : AppCompatActivity() {
 
         mainDataViewModel = MainDataViewModel.getInstance(this)
 
-        val admin = getString(R.string.role_admin)
+        val pengawas = getString(R.string.role_pengawas)
 
         mainViewModel.getUser().observe(this) { user ->
-            if (!user.isLogin || user.role != admin) {
+            if (!user.isLogin || user.role != pengawas) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
