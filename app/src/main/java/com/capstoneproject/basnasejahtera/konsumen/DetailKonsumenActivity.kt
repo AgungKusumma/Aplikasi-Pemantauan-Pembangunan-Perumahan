@@ -83,16 +83,26 @@ class DetailKonsumenActivity : AppCompatActivity() {
             val nf: NumberFormat = NumberFormat.getInstance(localeID)
             val price = nf.format(rumah.harga)
 
+            val nama = rumah.dataAkunKonsumen?.nama
             val nik = rumah.dataKonsumen?.nik
             val noTelp = rumah.dataKonsumen?.noTelp
             val pekerjaan = rumah.dataKonsumen?.pekerjaan
             val alamat = rumah.dataKonsumen?.alamat
+            val nominalBooking = rumah.dataBooking?.nominalBooking
+            val tglBooking = rumah.dataBooking?.tanggalBooking
+            val bookingPrice = nf.format(nominalBooking)
 
             binding.apply {
                 "Blok ${rumah.nomorRumah}".also { tvBlok.text = it }
-                "Tipe Rumah ${rumah.tipeRumah}".also { tvName.text = it }
+                "Tipe Rumah : ${rumah.tipeRumah}".also { tvTipeRumah.text = it }
                 "Harga Rumah : Rp. $price".also { tvPrice.text = it }
                 "Progress Pembangunan : ${rumah.progressPembangunan}%".also { tvProgress.text = it }
+
+                "Status Rumah : ${rumah.statusRumah}".also { tvStatusBooking.text = it }
+                "Nominal Booking : Rp.$bookingPrice".also { tvNominal.text = it }
+                "Tanggal Booking : $tglBooking".also { tvTanggal.text = it }
+
+                "Nama Pemilik : $nama".also { tvNama.text = it }
                 "NIK : $nik".also { tvNIK.text = it }
                 "No Telp : $noTelp".also { tvTelp.text = it }
                 "Pekerjaan : $pekerjaan".also { tvPekerjaan.text = it }

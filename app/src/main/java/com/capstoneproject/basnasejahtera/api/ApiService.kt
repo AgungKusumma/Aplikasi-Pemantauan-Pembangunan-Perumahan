@@ -41,4 +41,7 @@ interface ApiService {
         @Path("idRumah") idRumah: Int,
         @Body statusPembangunan: DataStatus,
     ): Call<DataUpdateResponse>
+
+    @GET("kustomer")
+    fun getAllDataKonsumen(): Call<List<DataRumahResponseItem>>
 }

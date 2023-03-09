@@ -39,6 +39,9 @@ data class Rumah(
 
     @field:SerializedName("dataKonsumen")
     val dataKonsumen: DataKonsumenNew? = null,
+
+    @field:SerializedName("dataBooking")
+    val dataBooking: DataBookingRumah? = null,
 ) : Parcelable
 
 @Parcelize
@@ -90,4 +93,25 @@ data class DataKonsumenNew(
 
     @field:SerializedName("updatedAt")
     val updatedAt: String? = null,
+) : Parcelable
+
+@Parcelize
+data class DataBookingRumah(
+    @field:SerializedName("id")
+    val id: Int? = null,
+
+    @field:SerializedName("id_konsumen")
+    val idKonsumen: Int? = null,
+
+    @field:SerializedName("id_rumah")
+    val idRumah: Int? = null,
+
+    @field:SerializedName("status_booking")
+    val statusBooking: String? = null,
+
+    @field:SerializedName("nominal_booking")
+    val nominalBooking: Int? = null,
+
+    @field:SerializedName("tanggal_booking")
+    val tanggalBooking: String? = null,
 ) : Parcelable
