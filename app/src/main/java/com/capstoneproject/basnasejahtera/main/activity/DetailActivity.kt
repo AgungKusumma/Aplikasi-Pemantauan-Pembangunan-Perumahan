@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.detail
+package com.capstoneproject.basnasejahtera.main.activity
 
 import android.content.Intent
 import android.graphics.Color
@@ -12,9 +12,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailBinding
-import com.capstoneproject.basnasejahtera.main.ProgressActivity
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.dataStore
+import com.capstoneproject.basnasejahtera.main.viewmodel.DetailDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory

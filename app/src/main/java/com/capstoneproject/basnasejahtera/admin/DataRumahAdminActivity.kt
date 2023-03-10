@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDataRumahAdminBinding
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
 import com.capstoneproject.basnasejahtera.main.adapter.ListDataRumahAdminAdapter
-import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference

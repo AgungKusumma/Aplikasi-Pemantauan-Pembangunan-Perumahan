@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.main.detail.DetailActivity
+import com.capstoneproject.basnasejahtera.main.activity.DetailActivity
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
 import java.util.*
 

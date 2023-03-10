@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.UpdateRumahAdminActivity">
+    tools:context=".admin.UpdateBookingAdminActivity">
 
     <TextView
         android:id="@+id/tvNomorRumah"
@@ -16,40 +16,11 @@
         android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvNama"
+        app:layout_constraintBottom_toTopOf="@+id/tvStatusBooking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/data_name" />
-
-    <TextView
-        android:id="@+id/tvNama"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStatusBooking"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNomorRumah"
-        tools:text="@string/name" />
-
-    <Button
-        android:id="@+id/pilihKonsumenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
-        android:backgroundTint="@color/blue"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/select_konsumen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_status" />
 
     <TextView
         android:id="@+id/tvStatusBooking"
@@ -61,11 +32,54 @@
         android:fontFamily="@font/poppins_bold"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTanggalBooking"
+        app:layout_constraintBottom_toTopOf="@+id/tvNama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNomorRumah"
+        tools:text="@string/status_rumah" />
+
+    <TextView
+        android:id="@+id/tvNama"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvStatusBooking"
+        tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvStatusBooking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvNama"
-        tools:text="@string/status_rumah" />
+        tools:text="@string/email" />
+
+    <Button
+        android:id="@+id/selectKonsumenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="24dp"
+        android:backgroundTint="@color/blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/select_konsumen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
     <TextView
         android:id="@+id/tvTanggalBooking"
@@ -77,10 +91,11 @@
         android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:textSize="15sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/nominalBookingEditTextLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStatusBooking"
+        app:layout_constraintTop_toBottomOf="@id/selectKonsumenButton"
         tools:text="@string/booking_date" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tvUbahStatus"
@@ -102,9 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="1"
-            android:enabled="false"
             android:fontFamily="@font/poppins"
-            android:hint="@string/booking_nominal"
+            android:hint="@string/booking_nominal_new"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,11 +127,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="0dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/change_status_rumah"
+        android:text="@string/select_new_status_rumah"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/rg_status"
@@ -127,13 +141,11 @@
 
     <RadioGroup
         android:id="@+id/rg_status"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="24dp"
+        android:background="@drawable/background"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUbahStatus">
 
@@ -141,6 +153,7 @@
             android:id="@+id/rb_terjual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins"
             android:text="@string/status_terjual"
@@ -150,20 +163,44 @@
             android:id="@+id/rb_diBooking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins"
             android:text="@string/status_diBooking"
             android:textColor="@color/black" />
+    </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/rb_belumTerjual"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rg_status">
+
+        <ImageButton
+            android:id="@+id/btn_once_date"
+            style="@style/Base.Widget.AppCompat.ImageButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/date_image"
+            android:src="@drawable/ic_date_range_black" />
+
+        <TextView
+            android:id="@+id/tv_once_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/status_belumTerjual"
-            android:textColor="@color/black" />
-    </RadioGroup>
+            android:text="@string/select_booking_date"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvNewStatus"

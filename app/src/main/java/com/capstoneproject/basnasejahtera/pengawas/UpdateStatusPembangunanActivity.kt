@@ -15,9 +15,10 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateStatusPembangunanBinding
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.dataStore
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
+import com.capstoneproject.basnasejahtera.main.viewmodel.UpdateStatusViewModel
 import com.capstoneproject.basnasejahtera.model.DataStatus
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory

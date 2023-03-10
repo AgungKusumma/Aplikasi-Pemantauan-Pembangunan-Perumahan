@@ -28,6 +28,14 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    fun getIDRumah(): Flow<DataIDRumah> {
+        return dataStore.data.map { preferences ->
+            DataIDRumah(
+                preferences[ID_RUMAH] ?: 0,
+            )
+        }
+    }
+
     suspend fun saveData(role: String) {
         dataStore.edit {
             it[ROLE_KEY] = role
@@ -39,6 +47,12 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit {
             it[ID_KONSUMEN] = id
             Log.d("ID", "Konsumen : $id")
+        }
+    }
+
+    suspend fun saveIDRumah(id: Int) {
+        dataStore.edit {
+            it[ID_RUMAH] = id
         }
     }
 
@@ -65,6 +79,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val STATE_KEY = booleanPreferencesKey("state")
 
         private val ID_KONSUMEN = intPreferencesKey("id")
+        private val ID_RUMAH = intPreferencesKey("id")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {
             return INSTANCE ?: synchronized(this) {

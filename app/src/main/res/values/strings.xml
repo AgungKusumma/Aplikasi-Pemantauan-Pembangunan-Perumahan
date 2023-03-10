@@ -56,6 +56,7 @@
     <string name="booking_nominal">Nominal Booking</string>
     <string name="booking_nominal_new">Masukkan Nominal Booking</string>
     <string name="booking_date">Tanggal Booking</string>
+    <string name="select_booking_date">Pilih Tanggal Booking</string>
     <string name="status_terjual">terjual</string>
     <string name="status_diBooking">di booking</string>
     <string name="status_belumTerjual">belum terjual</string>
@@ -64,6 +65,7 @@
     <string name="select_konsumen">Pilih Akun Konsumen</string>
     <string name="open_camera">Buka Kamera</string>
     <string name="no_permission">Tidak mendapatkan izin untuk membuka kamera</string>
+    <string name="date_image">Date Image</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>

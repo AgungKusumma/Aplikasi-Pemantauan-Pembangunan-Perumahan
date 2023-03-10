@@ -61,6 +61,8 @@ class ListDataKonsumenAdapter :
                         val intent =
                             Intent(itemView.context, UpdateBookingAdminActivity::class.java)
                         intent.putExtra("idKonsumen", dataKonsumen.id)
+                        intent.putExtra("namaKonsumen", dataKonsumen.dataAkun?.nama)
+                        intent.putExtra("emailKonsumen", dataKonsumen.dataAkun?.email)
                         itemView.context.startActivity(intent)
                     }
                 }

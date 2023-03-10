@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityMainAdminBinding
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
 import com.capstoneproject.basnasejahtera.main.adapter.ListDataKonsumenAdapter
-import com.capstoneproject.basnasejahtera.main.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
@@ -67,8 +67,6 @@ class MainAdminActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        val idRumah = intent.getIntExtra("idRumah", 0)
-
         adapter = ListDataKonsumenAdapter()
 
         binding.apply {
