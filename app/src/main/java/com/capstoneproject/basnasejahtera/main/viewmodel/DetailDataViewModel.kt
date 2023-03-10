@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.detail
+package com.capstoneproject.basnasejahtera.main.viewmodel
 
 import android.content.Context
 import android.util.Log

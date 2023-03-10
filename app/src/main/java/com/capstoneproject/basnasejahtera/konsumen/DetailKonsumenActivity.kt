@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityDetailKonsumenBinding
-import com.capstoneproject.basnasejahtera.main.ProgressActivity
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.dataStore
-import com.capstoneproject.basnasejahtera.main.detail.DetailDataViewModel
+import com.capstoneproject.basnasejahtera.main.activity.ProgressActivity
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
+import com.capstoneproject.basnasejahtera.main.viewmodel.DetailDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
@@ -90,7 +90,6 @@ class DetailKonsumenActivity : AppCompatActivity() {
             val alamat = rumah.dataKonsumen?.alamat
             val nominalBooking = rumah.dataBooking?.nominalBooking
             val tglBooking = rumah.dataBooking?.tanggalBooking
-            val bookingPrice = nf.format(nominalBooking)
 
             binding.apply {
                 "Blok ${rumah.nomorRumah}".also { tvBlok.text = it }
@@ -99,7 +98,10 @@ class DetailKonsumenActivity : AppCompatActivity() {
                 "Progress Pembangunan : ${rumah.progressPembangunan}%".also { tvProgress.text = it }
 
                 "Status Rumah : ${rumah.statusRumah}".also { tvStatusBooking.text = it }
-                "Nominal Booking : Rp.$bookingPrice".also { tvNominal.text = it }
+                if (nominalBooking != null) {
+                    val bookingPrice = nf.format(nominalBooking)
+                    "Nominal Booking : Rp.$bookingPrice".also { tvNominal.text = it }
+                }
                 "Tanggal Booking : $tglBooking".also { tvTanggal.text = it }
 
                 "Nama Pemilik : $nama".also { tvNama.text = it }

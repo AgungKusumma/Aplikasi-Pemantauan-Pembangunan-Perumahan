@@ -9,14 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateRumahAdminBinding
-import com.capstoneproject.basnasejahtera.main.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.dataStore
-import com.capstoneproject.basnasejahtera.main.detail.DetailDataViewModel
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
+import com.capstoneproject.basnasejahtera.main.viewmodel.DetailDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
+import com.capstoneproject.basnasejahtera.main.viewmodel.UpdateStatusViewModel
 import com.capstoneproject.basnasejahtera.model.DataUpdateBooking
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
-import com.capstoneproject.basnasejahtera.pengawas.UpdateStatusViewModel
 
 class UpdateRumahAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateRumahAdminBinding
@@ -66,6 +66,7 @@ class UpdateRumahAdminActivity : AppCompatActivity() {
             val nomorRumah = rumah.nomorRumah
             val statusBooking = rumah.statusRumah
             val namaKonsumen = rumah.dataAkunKonsumen?.nama
+            val emailKonsumen = rumah.dataAkunKonsumen?.email
             val nominalBooking = rumah.dataBooking?.nominalBooking
             val tanggalBooking = rumah.dataBooking?.tanggalBooking
 
@@ -74,6 +75,7 @@ class UpdateRumahAdminActivity : AppCompatActivity() {
 
                 "Nomor Rumah : $nomorRumah".also { tvNomorRumah.text = it }
                 "Nama Konsumen : $namaKonsumen".also { tvNama.text = it }
+                "Email Konsumen : $emailKonsumen".also { tvEmail.text = it }
                 "Status Rumah : $statusBooking".also { tvStatusBooking.text = it }
                 "Tanggal Booking : $tanggalBooking".also { tvTanggalBooking.text = it }
                 nominalBookingEditText.setText(nominalBooking.toString())
@@ -86,7 +88,7 @@ class UpdateRumahAdminActivity : AppCompatActivity() {
                 }
 
                 saveButton.setOnClickListener {
-                    if (newStatusBooking.isEmpty() || newStatusBooking == statusBooking) {
+                    if (newStatusBooking.isEmpty()) {
                         Toast.makeText(this@UpdateRumahAdminActivity,
                             getString(R.string.select_new_status_rumah),
                             Toast.LENGTH_LONG).show()

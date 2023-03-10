@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.main.MainActivity
+import com.capstoneproject.basnasejahtera.main.activity.MainActivity
 import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
 import java.util.*
 

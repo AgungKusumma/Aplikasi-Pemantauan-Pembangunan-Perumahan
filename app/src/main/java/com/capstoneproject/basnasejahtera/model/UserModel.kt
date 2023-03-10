@@ -47,3 +47,10 @@ data class DataKonsumen(
     @field:SerializedName("alamat")
     val alamat: String? = null,
 ) : Parcelable
+
+@Parcelize
+data class DataIDRumah(
+
+    @field:SerializedName("id")
+    val id: Int? = null,
+) : Parcelable

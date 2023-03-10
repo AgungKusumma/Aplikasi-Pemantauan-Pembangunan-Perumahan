@@ -62,7 +62,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.ProgressActivity"
+            android:name=".main.activity.ProgressActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -120,7 +120,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.HomeActivity"
+            android:name=".main.activity.HomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -135,14 +135,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.detail.DetailActivity"
+            android:name=".main.activity.DetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.activity.MainActivity"
             android:exported="false" />
         <activity
             android:name=".authentication.login.LoginActivity"
@@ -151,7 +151,7 @@
             android:name=".authentication.signup.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".main.WelcomeActivity"
+            android:name=".main.activity.WelcomeActivity"
             android:exported="false" />
 
         <provider

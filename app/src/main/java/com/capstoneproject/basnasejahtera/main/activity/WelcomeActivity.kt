@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main
+package com.capstoneproject.basnasejahtera.main.activity
 
 import android.content.Intent
 import android.os.Build

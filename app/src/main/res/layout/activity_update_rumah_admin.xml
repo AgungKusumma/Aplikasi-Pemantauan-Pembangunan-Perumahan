@@ -32,11 +32,27 @@
         android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStatusBooking"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvNomorRumah"
         tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvStatusBooking"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNama"
+        tools:text="@string/email" />
 
     <TextView
         android:id="@+id/tvStatusBooking"
@@ -51,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvTanggalBooking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNama"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
         tools:text="@string/status_rumah" />
 
     <TextView
@@ -114,13 +130,11 @@
 
     <RadioGroup
         android:id="@+id/rg_status"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="24dp"
+        android:background="@drawable/background"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUbahStatus">
 
@@ -129,23 +143,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/poppins"
             android:text="@string/status_terjual"
-            android:textColor="@color/black" />
-
-        <RadioButton
-            android:id="@+id/rb_diBooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins"
-            android:text="@string/status_diBooking"
             android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/rb_belumTerjual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins"
             android:text="@string/status_belumTerjual"
