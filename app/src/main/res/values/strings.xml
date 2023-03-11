@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Basna Sejahtera</string>
     <string name="signup">Simpan</string>
     <string name="login">Masuk</string>
@@ -69,7 +69,7 @@
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
-        <item>https://img.icons8.com/ios-glyphs/256/man-on-phone--v1.png</item>
+        <item tools:ignore="TypographyDashes">https://img.icons8.com/ios-glyphs/256/man-on-phone--v1.png</item>
         <item>https://img.icons8.com/ios-filled/256/user-manual.png</item>
     </string-array>
 
@@ -97,5 +97,23 @@
 
     <string-array name="data_home_pengawas">
         <item>Update Status Pembangunan</item>
+    </string-array>
+
+    <string-array name="data_photo_panduan">
+        <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
+        <item tools:ignore="TypographyDashes">https://img.icons8.com/ios-glyphs/256/man-on-phone--v1.png</item>
+        <item>https://cdn-icons-png.flaticon.com/256/9883/9883203.png</item>
+    </string-array>
+
+    <string-array name="data_panduan">
+        <item>Data Rumah Saya</item>
+        <item>Hubungi Admin</item>
+        <item>Logout / Keluar Akun</item>
+    </string-array>
+
+    <string-array name="data_detail_panduan">
+        <item>Menu ini berfungsi untuk melihat data rumah yang telah konsumen booking ataupun beli. Pada menu ini terdapat data rumah dan data konsumen serta informasi progress pembangunan perumahan, seperti gambar progress pembangunan rumah beserta persentase dan detail pengerjaan nya.</item>
+        <item>Menu ini berfungsi untuk menghubungi admin melalui aplikasi pihak ketiga yaitu WhatsApp, ketika menu ini di klik maka akan langsung dialihkan ke nomor WhatsApp Admin.</item>
+        <item>Menu ini berfungsi untuk mengeluarkan akun yang anda gunakan saat ini, dan ketika anda klik menu ini maka akan langsung dialihkan ke halaman selamat datang.</item>
     </string-array>
 </resources>
