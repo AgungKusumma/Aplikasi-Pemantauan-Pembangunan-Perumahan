@@ -43,14 +43,14 @@ class ListHomeKonsumenAdapter(private val listData: ArrayList<ItemData>) :
 
                 when (data) {
                     "Rumah Saya" -> {
-                        binding.root.setBackgroundColor(Color.GREEN)
+                        root.setBackgroundColor(Color.GREEN)
                     }
                     "Hubungi Admin" -> {
-                        binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                        root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_100))
                     }
                     "Panduan" -> {
-                        binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                        root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_50))
                     }
                 }
