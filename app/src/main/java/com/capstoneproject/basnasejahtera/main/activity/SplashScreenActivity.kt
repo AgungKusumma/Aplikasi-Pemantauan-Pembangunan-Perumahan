@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera
+package com.capstoneproject.basnasejahtera.main.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,13 +10,11 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivitySplashScreenBinding
 import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.*
-import com.capstoneproject.basnasejahtera.main.activity.HomeActivity
-import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
-import com.capstoneproject.basnasejahtera.main.activity.dataStore
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
@@ -66,21 +64,29 @@ class SplashScreenActivity : AppCompatActivity() {
         val pengawas = getString(R.string.role_pengawas)
 
         mainViewModel.getUser().observe(this) { user ->
-            if (user.isLogin && user.role == pegawai) {
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            } else if (user.isLogin && user.role == konsumen) {
-                startActivity(Intent(this, HomeKonsumenActivity::class.java))
-                finish()
-            } else if (user.isLogin && user.role == admin) {
-                startActivity(Intent(this, HomeAdminActivity::class.java))
-                finish()
-            } else if (user.isLogin && user.role == pengawas) {
-                startActivity(Intent(this, HomePengawasActivity::class.java))
-                finish()
-            } else {
-                startActivity(Intent(this, WelcomeActivity::class.java))
-                finish()
+            val login = user.isLogin
+            val role = user.role
+            when {
+                login && role == pegawai -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                }
+                login && role == konsumen -> {
+                    startActivity(Intent(this, HomeKonsumenActivity::class.java))
+                    finish()
+                }
+                login && role == admin -> {
+                    startActivity(Intent(this, HomeAdminActivity::class.java))
+                    finish()
+                }
+                login && role == pengawas -> {
+                    startActivity(Intent(this, HomePengawasActivity::class.java))
+                    finish()
+                }
+                else -> {
+                    startActivity(Intent(this, WelcomeActivity::class.java))
+                    finish()
+                }
             }
         }
     }

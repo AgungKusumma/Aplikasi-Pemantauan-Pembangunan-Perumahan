@@ -66,7 +66,6 @@ class AuthenticationViewModel(private val userRepository: UserRepository) : View
                 call: Call<UserModel>,
                 response: Response<UserModel>,
             ) {
-                Log.e(SIGNUP, "onResponse: " + response.body())
                 if (response.isSuccessful) {
                     _error.value = Event(false)
                 } else {

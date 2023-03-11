@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.activity
+package com.capstoneproject.basnasejahtera.admin
 
 import android.content.Intent
 import android.os.Build
@@ -10,27 +10,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.databinding.ActivityMainBinding
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataRumahAdapter
+import com.capstoneproject.basnasejahtera.databinding.ActivityMainAdminBinding
+import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
+import com.capstoneproject.basnasejahtera.main.activity.dataStore
+import com.capstoneproject.basnasejahtera.main.adapter.ListDataAkunAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MainKelolaAkunActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
-    private lateinit var adapter: ListDataRumahAdapter
+    private lateinit var adapter: ListDataAkunAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
         setupViewModel()
-        setupListData()
         showRecyclerList()
     }
 
@@ -55,47 +56,39 @@ class MainActivity : AppCompatActivity() {
 
         mainDataViewModel = MainDataViewModel.getInstance(this)
 
-        val pegawai = getString(R.string.role_pegawai)
+        val admin = getString(R.string.role_admin)
 
         mainViewModel.getUser().observe(this) { user ->
-            if (!user.isLogin || user.role != pegawai) {
+            if (!user.isLogin || user.role != admin) {
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
             }
         }
     }
 
-    private fun setupListData() {
-        val namaBlok = intent.getStringExtra("namaBlok")
-
-        if (namaBlok != null && namaBlok != "all") {
-            mainDataViewModel.getDataRumah(namaBlok)
-        } else {
-            mainDataViewModel.getAllDataRumah()
-        }
-    }
-
     private fun showRecyclerList() {
-        adapter = ListDataRumahAdapter()
+        adapter = ListDataAkunAdapter()
 
         binding.apply {
-            rvItemHouse.layoutManager = GridLayoutManager(this@MainActivity, 2)
-            rvItemHouse.setHasFixedSize(true)
-            rvItemHouse.adapter = adapter
+            rvItemKonsumen.layoutManager = GridLayoutManager(this@MainKelolaAkunActivity, 2)
+            rvItemKonsumen.setHasFixedSize(true)
+            rvItemKonsumen.adapter = adapter
         }
+
+        mainDataViewModel.getAllDataKonsumen()
 
         mainDataViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        mainDataViewModel.dataRumah.observe(this) {
-            adapter.setListRumah(it)
+        mainDataViewModel.dataKonsumen.observe(this) {
+            adapter.setlistDataAkun(it)
         }
 
         mainDataViewModel.error.observe(this) { event ->
             event.getContentIfNotHandled()?.let { error ->
                 if (error) {
-                    binding.rvItemHouse.adapter = null
+                    binding.rvItemKonsumen.adapter = null
                 }
             }
         }

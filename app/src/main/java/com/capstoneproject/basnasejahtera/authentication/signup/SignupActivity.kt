@@ -33,8 +33,8 @@ class SignupActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString()
             val nik = binding.nikEditText.text.toString()
             val noHp = binding.noHPEditText.text.toString()
-            val alamat = binding.alamatEditText.text.toString()
             val pekerjaan = binding.pekerjaanEditText.text.toString()
+            val alamat = binding.alamatEditText.text.toString()
 
             when {
                 name.isEmpty() -> {
@@ -52,21 +52,16 @@ class SignupActivity : AppCompatActivity() {
                 noHp.isEmpty() -> {
                     binding.noHPEditTextLayout.error = "Masukkan No HP"
                 }
-                alamat.isEmpty() -> {
-                    binding.alamatEditTextLayout.error = "Masukkan Alamat"
-                }
                 pekerjaan.isEmpty() -> {
                     binding.pekerjaanEditTextLayout.error = "Masukkan Pekerjaan"
                 }
+                alamat.isEmpty() -> {
+                    binding.alamatEditTextLayout.error = "Masukkan Alamat"
+                }
                 else -> {
-                    authenticationViewModel.userRegister(email,
-                        password,
-                        name,
-                        noHp,
-                        "Konsumen",
-                        nik,
-                        pekerjaan,
-                        alamat)
+                    authenticationViewModel.userRegister(
+                        email, password, name, noHp,
+                        "Konsumen", nik, pekerjaan, alamat)
                     authenticationViewModel.error.observe(this@SignupActivity) { event ->
                         event.getContentIfNotHandled()?.let { error ->
                             if (!error) {

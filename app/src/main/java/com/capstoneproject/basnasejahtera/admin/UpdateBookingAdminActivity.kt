@@ -121,55 +121,62 @@ class UpdateBookingAdminActivity : AppCompatActivity(), DatePickerFragment.Dialo
             }
 
             saveButton.setOnClickListener {
-                if (idKonsumen == 0) {
-                    Toast.makeText(this@UpdateBookingAdminActivity,
-                        getString(R.string.select_konsumen),
-                        Toast.LENGTH_LONG).show()
-                } else if (nominalBookingEditText.text.toString().trim().isEmpty()) {
-                    Toast.makeText(this@UpdateBookingAdminActivity,
-                        getString(R.string.booking_nominal_new),
-                        Toast.LENGTH_LONG).show()
-                } else if (newStatusBooking.isEmpty()) {
-                    Toast.makeText(this@UpdateBookingAdminActivity,
-                        getString(R.string.select_new_status_rumah),
-                        Toast.LENGTH_LONG).show()
-                } else if (!clicked) {
-                    Toast.makeText(this@UpdateBookingAdminActivity,
-                        getString(R.string.select_booking_date),
-                        Toast.LENGTH_LONG).show()
-                } else {
-                    val tanggalBooking = tvTanggalBooking.text
-                    val nominalBooking = nominalBookingEditText.text
-                    val newNominal = nominalBooking.toString().toInt()
-                    val data = DataUpdateBooking(idKonsumen,
-                        newStatusBooking.toString(),
-                        newNominal,
-                        tanggalBooking.toString())
-
-                    mainViewModel.getIDRumah().observe(this@UpdateBookingAdminActivity) { rumah ->
-                        updateStatusViewModel.updateStatusBooking(rumah.id!!, data)
+                when {
+                    idKonsumen == 0 -> {
+                        Toast.makeText(this@UpdateBookingAdminActivity,
+                            getString(R.string.select_konsumen),
+                            Toast.LENGTH_LONG).show()
                     }
-                    updateStatusViewModel.error.observe(this@UpdateBookingAdminActivity) { event ->
-                        event.getContentIfNotHandled()?.let { error ->
-                            if (!error) {
-                                updateStatusViewModel.data.observe(this@UpdateBookingAdminActivity) { event ->
-                                    event.getContentIfNotHandled()?.let {
-                                        Toast.makeText(this@UpdateBookingAdminActivity,
-                                            getString(R.string.success_update_status_pembangunan),
-                                            Toast.LENGTH_LONG).show()
-                                        val intent =
-                                            Intent(this@UpdateBookingAdminActivity,
-                                                HomeAdminActivity::class.java)
-                                        intent.flags =
-                                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                        startActivity(intent)
-                                        finish()
+                    nominalBookingEditText.text.toString().trim().isEmpty() -> {
+                        Toast.makeText(this@UpdateBookingAdminActivity,
+                            getString(R.string.booking_nominal_new),
+                            Toast.LENGTH_LONG).show()
+                    }
+                    newStatusBooking.isEmpty() -> {
+                        Toast.makeText(this@UpdateBookingAdminActivity,
+                            getString(R.string.select_new_status_rumah),
+                            Toast.LENGTH_LONG).show()
+                    }
+                    !clicked -> {
+                        Toast.makeText(this@UpdateBookingAdminActivity,
+                            getString(R.string.select_booking_date),
+                            Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                        val tanggalBooking = tvTanggalBooking.text
+                        val nominalBooking = nominalBookingEditText.text
+                        val newNominal = nominalBooking.toString().toInt()
+                        val data = DataUpdateBooking(idKonsumen,
+                            newStatusBooking.toString(),
+                            newNominal,
+                            tanggalBooking.toString())
+
+                        mainViewModel.getIDRumah()
+                            .observe(this@UpdateBookingAdminActivity) { rumah ->
+                                updateStatusViewModel.updateStatusBooking(rumah.id!!, data)
+                            }
+                        updateStatusViewModel.error.observe(this@UpdateBookingAdminActivity) { event ->
+                            event.getContentIfNotHandled()?.let { error ->
+                                if (!error) {
+                                    updateStatusViewModel.data.observe(this@UpdateBookingAdminActivity) { event ->
+                                        event.getContentIfNotHandled()?.let {
+                                            Toast.makeText(this@UpdateBookingAdminActivity,
+                                                getString(R.string.success_update_status_pembangunan),
+                                                Toast.LENGTH_LONG).show()
+                                            val intent =
+                                                Intent(this@UpdateBookingAdminActivity,
+                                                    HomeAdminActivity::class.java)
+                                            intent.flags =
+                                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                            startActivity(intent)
+                                            finish()
+                                        }
                                     }
+                                } else {
+                                    Toast.makeText(this@UpdateBookingAdminActivity,
+                                        getString(R.string.update_failed),
+                                        Toast.LENGTH_LONG).show()
                                 }
-                            } else {
-                                Toast.makeText(this@UpdateBookingAdminActivity,
-                                    getString(R.string.update_failed),
-                                    Toast.LENGTH_LONG).show()
                             }
                         }
                     }

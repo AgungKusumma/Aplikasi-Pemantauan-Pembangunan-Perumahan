@@ -42,3 +42,27 @@ data class DataUpdateBooking(
     @field:SerializedName("tanggalBooking")
     val tanggalBooking: String,
 ) : Parcelable
+
+@Parcelize
+data class DataUpdateAkun(
+    @field:SerializedName("email")
+    val email: String,
+
+    @field:SerializedName("kataSandi")
+    val kataSandi: String,
+
+    @field:SerializedName("nama")
+    val nama: String,
+
+    @field:SerializedName("noHp")
+    val noHp: String,
+
+    @field:SerializedName("nik")
+    val nik: String,
+
+    @field:SerializedName("pekerjaan")
+    val pekerjaan: String,
+
+    @field:SerializedName("alamat")
+    val alamat: String,
+) : Parcelable
