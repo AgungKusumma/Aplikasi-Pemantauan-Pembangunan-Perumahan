@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstoneproject.basnasejahtera.model.DataStatus
-import com.capstoneproject.basnasejahtera.model.DataUpdateBooking
-import com.capstoneproject.basnasejahtera.model.DataUpdateResponse
-import com.capstoneproject.basnasejahtera.model.UserRepository
+import com.capstoneproject.basnasejahtera.model.*
 import com.capstoneproject.basnasejahtera.utils.Event
 import com.capstoneproject.basnasejahtera.utils.Injection
 import retrofit2.Call
@@ -35,7 +32,33 @@ class UpdateStatusViewModel(private val userRepository: UserRepository) : ViewMo
                     _error.value = Event(false)
                     userRepository.appExecutors.networkIO.execute {
                         _data.postValue(Event(response.body()!!))
-                        Log.d(PEMBANGUNAN, "onResponse success: ${response.body()}")
+                    }
+                } else {
+                    Log.e(PEMBANGUNAN, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                    _error.value = Event(true)
+                }
+            }
+
+            override fun onFailure(call: Call<DataUpdateResponse>, t: Throwable) {
+                Log.e(PEMBANGUNAN, "onFailure: " + t.message)
+                _message.value = Event(t.message.toString())
+                _error.value = Event(true)
+            }
+        })
+    }
+
+    fun updateDataAkun(idAkun: Int, dataUpdateAkun: DataUpdateAkun) {
+        val client = userRepository.updateDataAkun(idAkun, dataUpdateAkun)
+        client.enqueue(object : Callback<DataUpdateResponse> {
+            override fun onResponse(
+                call: Call<DataUpdateResponse>,
+                response: Response<DataUpdateResponse>,
+            ) {
+                if (response.isSuccessful) {
+                    _error.value = Event(false)
+                    userRepository.appExecutors.networkIO.execute {
+                        _data.postValue(Event(response.body()!!))
                     }
                 } else {
                     Log.e(PEMBANGUNAN, "onResponse fail: ${response.message()}")
@@ -63,7 +86,6 @@ class UpdateStatusViewModel(private val userRepository: UserRepository) : ViewMo
                     _error.value = Event(false)
                     userRepository.appExecutors.networkIO.execute {
                         _data.postValue(Event(response.body()!!))
-                        Log.d(PEMBANGUNAN, "onResponse success: ${response.body()}")
                     }
                 } else {
                     Log.e(PEMBANGUNAN, "onResponse fail: ${response.message()}")

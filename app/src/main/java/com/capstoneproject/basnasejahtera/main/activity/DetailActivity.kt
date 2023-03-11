@@ -68,9 +68,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setupData() {
         val idRumah = intent.getIntExtra("idRumah", 0)
 
-//        mainViewModel.getUser().observe(this) {
         detailDataViewModel.getDataRumah(idRumah)
-//        }
 
         detailDataViewModel.isLoading.observe(this) {
             showLoading(it)

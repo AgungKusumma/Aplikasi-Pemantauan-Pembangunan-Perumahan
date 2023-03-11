@@ -69,6 +69,13 @@ class UserRepository private constructor(
         return apiService.updateStatusBooking(idRumah, statusBooking)
     }
 
+    fun updateDataAkun(
+        idAkun: Int,
+        dataAkun: DataUpdateAkun,
+    ): Call<DataUpdateResponse> {
+        return apiService.updateDataAkun(idAkun, dataAkun)
+    }
+
     fun getAllDataKonsumen(): Call<List<DataKonsumenResponseItem>> {
         return apiService.getAllDataKonsumen()
     }

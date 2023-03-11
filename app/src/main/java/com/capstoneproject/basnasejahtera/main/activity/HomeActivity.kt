@@ -60,20 +60,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupDateandTime() {
-        val date = SimpleDateFormat("E, dd MMMM yyyy")
-        val time = SimpleDateFormat("hh:mm a")
+        val localeID = Locale("in", "ID")
+        val date = SimpleDateFormat("EEEE, dd MMMM yyyy", localeID)
+        val time = SimpleDateFormat("HH:mm", localeID)
 
         val currentDate = date.format(Date())
         val currentTime = time.format(Date())
 
         binding.tvDate.text = currentDate
-        binding.tvTime.text = currentTime
+        "$currentTime WIB".also { binding.tvTime.text = it }
     }
 
     private fun setupListData() {
-        mainViewModel.getUser().observe(this) {
-            mainDataViewModel.getBlok()
-        }
+        mainDataViewModel.getBlok()
     }
 
     private fun showRecyclerList() {

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.admin.DataRumahAdminActivity
+import com.capstoneproject.basnasejahtera.admin.MainKelolaAkunActivity
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.konsumen.KelolaAkunKonsumenActivity
 import com.capstoneproject.basnasejahtera.model.ItemData
 
 class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
@@ -69,7 +69,7 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                         }
                         "Kelola Akun Konsumen" -> {
                             val intent =
-                                Intent(itemView.context, KelolaAkunKonsumenActivity::class.java)
+                                Intent(itemView.context, MainKelolaAkunActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
                     }

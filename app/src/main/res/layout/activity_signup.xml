@@ -119,8 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/alamatEditTextLayout"
+            app:layout_constraintBottom_toTopOf="@+id/pekerjaanEditTextLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nikEditTextLayout">
@@ -137,6 +136,29 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pekerjaanEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/alamatEditTextLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noHPEditTextLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pekerjaanEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="1"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/pekerjaan"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/alamatEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
@@ -144,10 +166,10 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/pekerjaanEditTextLayout"
+            app:layout_constraintBottom_toTopOf="@+id/saveButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/noHPEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@id/pekerjaanEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/alamatEditText"
@@ -158,28 +180,6 @@
                 android:gravity="start"
                 android:hint="@string/alamat"
                 android:inputType="textMultiLine" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pekerjaanEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/saveButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/alamatEditTextLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pekerjaanEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="1"
-                android:fontFamily="@font/poppins"
-                android:hint="@string/pekerjaan"
-                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -195,7 +195,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pekerjaanEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/alamatEditTextLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
