@@ -59,6 +59,10 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
         binding = ActivityUpdateStatusPembangunanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.update_progress_pembangunan)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         setupViewModel()
         setupData()
         setupAction()
@@ -158,6 +162,12 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
             val result = BitmapFactory.decodeFile(getFile?.path)
             binding.previewImage.setImageBitmap(result)
         }
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     companion object {

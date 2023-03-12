@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
+        android:textColor="?android:textColorPrimary"
         android:text="@string/copyright"
         android:textSize="14sp" />
 </LinearLayout>

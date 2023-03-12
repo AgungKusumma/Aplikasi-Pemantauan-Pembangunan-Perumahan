@@ -10,7 +10,7 @@
         android:id="@+id/ivHouse"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/house_image"
         android:src="@drawable/house"
         app:layout_constraintEnd_toEndOf="parent"

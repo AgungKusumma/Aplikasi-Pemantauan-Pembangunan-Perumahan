@@ -35,6 +35,10 @@ class UpdateBookingAdminActivity : AppCompatActivity(), DatePickerFragment.Dialo
         binding = ActivityUpdateBookingAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.update_data_booking)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         setupViewModel()
         setupData()
         setupAction()
@@ -196,6 +200,12 @@ class UpdateBookingAdminActivity : AppCompatActivity(), DatePickerFragment.Dialo
         binding.tvOnceDate.text = dateFormat.format(calendar.time)
         binding.tvTanggalBooking.text = dateFormat.format(calendar.time)
         clicked = true
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     companion object {
