@@ -26,6 +26,10 @@ class PanduanActivity : AppCompatActivity() {
         binding = ActivityPanduanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.panduan)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         setupViewModel()
         showRecyclerList()
     }
@@ -70,4 +74,10 @@ class PanduanActivity : AppCompatActivity() {
             }
             return listData
         }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

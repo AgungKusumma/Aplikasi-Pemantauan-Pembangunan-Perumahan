@@ -1,7 +1,6 @@
 package com.capstoneproject.basnasejahtera.main.adapter
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,7 +42,8 @@ class ListHomeKonsumenAdapter(private val listData: ArrayList<ItemData>) :
 
                 when (data) {
                     "Rumah Saya" -> {
-                        root.setBackgroundColor(Color.GREEN)
+                        root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                            R.color.blue_200))
                     }
                     "Hubungi Admin" -> {
                         root.setBackgroundColor(ContextCompat.getColor(itemView.context,

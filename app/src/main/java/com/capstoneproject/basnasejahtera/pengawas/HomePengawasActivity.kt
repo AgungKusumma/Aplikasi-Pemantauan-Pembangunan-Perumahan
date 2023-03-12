@@ -3,6 +3,7 @@ package com.capstoneproject.basnasejahtera.pengawas
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -88,9 +89,17 @@ class HomePengawasActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.fabLogout.setOnClickListener {
-            mainViewModel.logout()
-            Toast.makeText(this@HomePengawasActivity,
-                getString(R.string.logout_success), Toast.LENGTH_LONG).show()
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("Logout")
+            alert.setMessage("Anda yakin ingin mengeluarkan akun?")
+                .setPositiveButton("Ya") { _, _ ->
+                    mainViewModel.logout()
+                    Toast.makeText(this,
+                        getString(R.string.logout_success), Toast.LENGTH_LONG).show()
+                }.setNegativeButton("Tidak", null)
+
+            val alert1 = alert.create()
+            alert1.show()
         }
     }
 

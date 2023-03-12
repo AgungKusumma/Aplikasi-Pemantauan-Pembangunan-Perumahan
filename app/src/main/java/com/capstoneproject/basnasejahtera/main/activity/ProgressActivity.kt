@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityProgressBinding
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
@@ -17,6 +18,10 @@ class ProgressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProgressBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.progress)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
 
         setupViewModel()
         setupData()
@@ -50,5 +55,11 @@ class ProgressActivity : AppCompatActivity() {
             progressBar.progress = progress
             "$progress%".also { textViewProgress.text = it }
         }
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

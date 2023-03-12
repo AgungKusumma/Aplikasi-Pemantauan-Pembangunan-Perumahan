@@ -18,6 +18,11 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.new_account)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
+
         setupViewModel()
         setupAction()
     }
@@ -83,4 +88,9 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

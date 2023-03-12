@@ -30,6 +30,10 @@ class KelolaAkunKonsumenActivity : AppCompatActivity() {
         binding = ActivityKelolaAkunKonsumenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.manage_account)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         setupViewModel()
         setupAction()
     }
@@ -149,5 +153,11 @@ class KelolaAkunKonsumenActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

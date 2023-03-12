@@ -29,6 +29,10 @@ class UpdateRumahAdminActivity : AppCompatActivity() {
         binding = ActivityUpdateRumahAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionbar = supportActionBar
+        actionbar?.title = getString(R.string.update_data_booking)
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         setupViewModel()
         setupData()
     }
@@ -131,5 +135,11 @@ class UpdateRumahAdminActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

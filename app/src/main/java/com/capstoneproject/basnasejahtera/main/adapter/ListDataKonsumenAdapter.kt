@@ -45,10 +45,13 @@ class ListDataKonsumenAdapter :
 
                 when (statusBooking) {
                     "terjual" -> {
-                        binding.root.setBackgroundColor(Color.GREEN)
+                        root.setBackgroundColor(Color.GREEN)
                     }
                     "di booking" -> {
-                        binding.root.setBackgroundColor(Color.YELLOW)
+                        root.setBackgroundColor(Color.YELLOW)
+                    }
+                    else -> {
+                        root.setBackgroundColor(Color.WHITE)
                     }
                 }
 

@@ -103,7 +103,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
             android:text="@string/forgot_password"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/callAdminTextView"
             app:layout_constraintEnd_toEndOf="parent"

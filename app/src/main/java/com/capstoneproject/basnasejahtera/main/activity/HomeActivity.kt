@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -103,9 +104,17 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.fabLogout.setOnClickListener {
-            mainViewModel.logout()
-            Toast.makeText(this@HomeActivity,
-                getString(R.string.logout_success), Toast.LENGTH_LONG).show()
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("Logout")
+            alert.setMessage("Anda yakin ingin mengeluarkan akun?")
+                .setPositiveButton("Ya") { _, _ ->
+                    mainViewModel.logout()
+                    Toast.makeText(this,
+                        getString(R.string.logout_success), Toast.LENGTH_LONG).show()
+                }.setNegativeButton("Tidak", null)
+
+            val alert1 = alert.create()
+            alert1.show()
         }
     }
 
