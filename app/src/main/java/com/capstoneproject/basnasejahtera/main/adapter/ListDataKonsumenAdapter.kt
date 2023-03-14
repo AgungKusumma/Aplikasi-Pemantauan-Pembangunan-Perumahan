@@ -60,6 +60,10 @@ class ListDataKonsumenAdapter :
                         Toast.makeText(itemView.context,
                             "Konsumen sudah membeli rumah\nPilih Konsumen yang lain",
                             Toast.LENGTH_LONG).show()
+                    } else if (statusBooking == "di booking") {
+                        Toast.makeText(itemView.context,
+                            "Konsumen sudah booking rumah\nPilih Konsumen yang lain",
+                            Toast.LENGTH_LONG).show()
                     } else {
                         val intent =
                             Intent(itemView.context, UpdateBookingAdminActivity::class.java)

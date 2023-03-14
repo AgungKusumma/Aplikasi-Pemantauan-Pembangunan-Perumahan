@@ -14,18 +14,45 @@ data class DataUpdateResponse(
 ) : Parcelable
 
 @Parcelize
+data class DataUpdatePembangunanResponse(
+    @field:SerializedName("id_blok")
+    val idBlok: Int? = null,
+
+    @field:SerializedName("createdAt")
+    val createdAt: String? = null,
+
+    @field:SerializedName("nomor_rumah")
+    val nomorRumah: String? = null,
+
+    @field:SerializedName("harga")
+    val harga: Int? = null,
+
+    @field:SerializedName("image_progress_pembangunan")
+    val imageProgressPembangunan: String? = null,
+
+    @field:SerializedName("details_progress_pembangunan")
+    val detailsProgressPembangunan: String? = null,
+
+    @field:SerializedName("tipe_rumah")
+    val tipeRumah: String? = null,
+
+    @field:SerializedName("id")
+    val id: Int? = null,
+
+    @field:SerializedName("progress_pembangunan")
+    val progressPembangunan: String? = null,
+
+    @field:SerializedName("updatedAt")
+    val updatedAt: String? = null,
+) : Parcelable
+
+@Parcelize
 data class Data(
     @field:SerializedName("idRumah")
     val idRumah: String,
 
     @field:SerializedName("statusPembangunan")
     val statusPembangunan: String,
-) : Parcelable
-
-@Parcelize
-data class DataStatus(
-    @field:SerializedName("statusPembangunan")
-    val statusPembangunan: Int,
 ) : Parcelable
 
 @Parcelize
@@ -56,6 +83,9 @@ data class DataUpdateAkun(
 
     @field:SerializedName("noHp")
     val noHp: String,
+
+    @field:SerializedName("role")
+    val role: String,
 
     @field:SerializedName("nik")
     val nik: String,

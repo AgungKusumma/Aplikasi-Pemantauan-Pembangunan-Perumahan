@@ -55,8 +55,6 @@ class ListDataRumahPengawasAdapter :
                     val intent =
                         Intent(itemView.context, UpdateStatusPembangunanActivity::class.java)
                     intent.putExtra("idRumah", dataRumah.id)
-                    intent.putExtra("nomorRumah", dataRumah.nomorRumah)
-                    intent.putExtra("progress", dataRumah.progressPembangunan)
                     itemView.context.startActivity(intent)
                 }
             }

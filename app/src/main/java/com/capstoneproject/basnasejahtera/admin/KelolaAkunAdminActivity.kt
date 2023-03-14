@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.konsumen
+package com.capstoneproject.basnasejahtera.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ActivityKelolaAkunKonsumenBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
@@ -18,8 +17,7 @@ import com.capstoneproject.basnasejahtera.model.DataUpdateAkun
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-
-class KelolaAkunKonsumenActivity : AppCompatActivity() {
+class KelolaAkunAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityKelolaAkunKonsumenBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var detailDataViewModel: DetailDataViewModel
@@ -58,6 +56,7 @@ class KelolaAkunKonsumenActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
+        val idRumah = intent.getIntExtra("idRumah", 0)
         val idAkun = intent.getIntExtra("idAkun", 0)
         val nameEt = binding.nameEditText
         val emailEt = binding.emailEditText
@@ -67,7 +66,7 @@ class KelolaAkunKonsumenActivity : AppCompatActivity() {
         val pekerjaanEt = binding.pekerjaanEditText
         val alamatEt = binding.alamatEditText
 
-        detailDataViewModel.getDataRumahKonsumen(idAkun)
+        detailDataViewModel.getDataRumahKonsumen(idRumah)
 
         detailDataViewModel.isLoading.observe(this) {
             showLoading(it)
@@ -123,13 +122,20 @@ class KelolaAkunKonsumenActivity : AppCompatActivity() {
                     binding.alamatEditTextLayout.error = "Masukkan Alamat"
                 }
                 else -> {
-                    val data = DataUpdateAkun(email, password, nama, noHp, nik, pekerjaan, alamat)
+                    val data = DataUpdateAkun(email,
+                        password,
+                        nama,
+                        noHp,
+                        "Konsumen",
+                        nik,
+                        pekerjaan,
+                        alamat)
 
                     updateStatusViewModel.updateDataAkun(idAkun, data)
                     updateStatusViewModel.error.observe(this) { event ->
                         event.getContentIfNotHandled()?.let { error ->
                             if (!error) {
-                                updateStatusViewModel.data.observe(this@KelolaAkunKonsumenActivity) { event ->
+                                updateStatusViewModel.data.observe(this@KelolaAkunAdminActivity) { event ->
                                     event.getContentIfNotHandled()?.let {
                                         Toast.makeText(this,
                                             getString(R.string.success_update_status_pembangunan),

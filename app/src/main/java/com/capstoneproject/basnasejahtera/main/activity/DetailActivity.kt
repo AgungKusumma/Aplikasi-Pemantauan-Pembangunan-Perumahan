@@ -127,9 +127,7 @@ class DetailActivity : AppCompatActivity() {
 
                 progressBtn.setOnClickListener {
                     val intent = Intent(this@DetailActivity, ProgressActivity::class.java)
-                    intent.putExtra("nomorRumah", rumah.nomorRumah)
-                    intent.putExtra("updatedAt", rumah.updatedAt)
-                    intent.putExtra("progress", rumah.progressPembangunan)
+                    intent.putExtra("idRumah", idRumah)
                     startActivity(intent)
                 }
             }

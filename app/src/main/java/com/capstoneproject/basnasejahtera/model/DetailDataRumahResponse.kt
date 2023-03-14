@@ -34,6 +34,12 @@ data class Rumah(
     @field:SerializedName("updatedAt")
     val updatedAt: String? = null,
 
+    @field:SerializedName("details_progress_pembangunan")
+    val detailsProgressPembangunan: String? = null,
+
+    @field:SerializedName("image_progress_pembangunan")
+    val imageProgressPembangunan: String? = null,
+
     @field:SerializedName("dataAkunKonsumen")
     val dataAkunKonsumen: DataAkunKonsumen? = null,
 

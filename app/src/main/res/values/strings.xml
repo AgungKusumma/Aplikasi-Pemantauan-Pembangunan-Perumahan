@@ -25,6 +25,8 @@
     <string name="house_image">House Image</string>
     <string name="user_image">User Image</string>
     <string name="progress">Progress Pembangunan</string>
+    <string name="new_progress">Progress Pembangunan Terbaru</string>
+    <string name="new_detail_progress">Detail Progress Pembangunan Terbaru</string>
     <string name="update_progress_pembangunan">Update Progress</string>
     <string name="progressNew">Masukkan Progress Terbaru</string>
     <string name="role_admin">Admin</string>
@@ -66,13 +68,21 @@
     <string name="change_status_rumah">Ubah Status Rumah</string>
     <string name="select_new_status_rumah">Pilih Status Rumah yang terbaru</string>
     <string name="select_konsumen">Pilih Akun Konsumen</string>
-    <string name="open_camera">Buka Kamera</string>
+    <string name="open_camera">Ambil Gambar Terbaru Disini</string>
     <string name="no_permission">Tidak mendapatkan izin untuk membuka kamera</string>
     <string name="date_image">Date Image</string>
     <string name="update_data_booking">Update Data Booking</string>
     <string name="manage_account">Kelola Akun</string>
     <string name="panduan">Panduan</string>
     <string name="new_account">Tambah Akun Baru</string>
+    <string name="logout_message">Anda yakin ingin mengeluarkan akun?</string>
+    <string name="logout">Logout</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="network_error">Cek koneksi anda</string>
+    <string name="empty_image">Silahkan ambil gambar terlebih dahulu</string>
+    <string name="select_progress">Pilih Progress Terbaru Disini</string>
+    <string name="empty_progress">Silahkan Pilih Progress Pembangunan terlebih dahulu</string>
 
     <string-array name="data_photo">
         <item>https://cdn-icons-png.flaticon.com/256/126/126496.png</item>
@@ -122,5 +132,27 @@
         <item>Menu ini berfungsi untuk melihat data rumah yang telah konsumen booking ataupun beli. Pada menu ini terdapat data rumah dan data konsumen serta informasi progress pembangunan perumahan, seperti gambar progress pembangunan rumah beserta persentase dan detail pengerjaan nya.</item>
         <item>Menu ini berfungsi untuk menghubungi admin melalui aplikasi pihak ketiga yaitu WhatsApp, ketika menu ini di klik maka akan langsung dialihkan ke nomor WhatsApp Admin.</item>
         <item>Menu ini berfungsi untuk mengeluarkan akun yang anda gunakan saat ini, dan ketika anda klik menu ini maka akan langsung dialihkan ke halaman selamat datang.</item>
+    </string-array>
+
+    <integer-array name="persentase_progress">
+        <item>10</item>
+        <item>40</item>
+        <item>60</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>100</item>
+    </integer-array>
+
+    <string-array name="detail_progress">
+        <item>BowPlank, Sloof dan Pondasi</item>
+        <item>Kolom dan Penyusunan Bata</item>
+        <item>Ring Balok dan Ampig</item>
+        <item>Pemasangan Rangka Atap dan Gypsum</item>
+        <item>Pemasangan Genteng dan Nok</item>
+        <item>Pengacian dan Pengeboran</item>
+        <item>Pemasangan Keramik</item>
+        <item>Finishing</item>
     </string-array>
 </resources>

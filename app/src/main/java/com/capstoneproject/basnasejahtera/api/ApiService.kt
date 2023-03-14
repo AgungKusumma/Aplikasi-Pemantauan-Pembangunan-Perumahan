@@ -1,6 +1,8 @@
 package com.capstoneproject.basnasejahtera.api
 
 import com.capstoneproject.basnasejahtera.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -36,11 +38,14 @@ interface ApiService {
         @Path("idKonsumen") id: Int,
     ): Call<DetailDataRumahResponse>
 
-    @POST("rumah/status-pembangunan/{idRumah}/")
-    fun updateStatusPembangunan(
+    @Multipart
+    @POST("rumah/progress/{idRumah}")
+    fun newUpdateStatusPembangunan(
         @Path("idRumah") idRumah: Int,
-        @Body statusPembangunan: DataStatus,
-    ): Call<DataUpdateResponse>
+        @Part file: MultipartBody.Part,
+        @Part("persentaseProgress") persentaseProgress: RequestBody,
+        @Part("detailProgress") detailProgress: RequestBody,
+    ): Call<DataUpdatePembangunanResponse>
 
     @POST("rumah/status/{idRumah}/")
     fun updateStatusBooking(
@@ -48,7 +53,7 @@ interface ApiService {
         @Body statusBooking: DataUpdateBooking,
     ): Call<DataUpdateResponse>
 
-    @POST("rumah/status/{idAkun}/")
+    @PUT("akun/{idAkun}/")
     fun updateDataAkun(
         @Path("idAkun") idAkun: Int,
         @Body dataAkun: DataUpdateAkun,
