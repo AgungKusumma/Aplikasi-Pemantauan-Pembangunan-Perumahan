@@ -2,6 +2,8 @@ package com.capstoneproject.basnasejahtera.model
 
 import com.capstoneproject.basnasejahtera.api.ApiService
 import com.capstoneproject.basnasejahtera.utils.AppExecutors
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 
 class UserRepository private constructor(
@@ -55,11 +57,16 @@ class UserRepository private constructor(
         return apiService.getDetailRumahKonsumen(id)
     }
 
-    fun updateStatusPembangunan(
+    fun newUpdateStatusPembangunan(
         idRumah: Int,
-        statusPembangunan: DataStatus,
-    ): Call<DataUpdateResponse> {
-        return apiService.updateStatusPembangunan(idRumah, statusPembangunan)
+        file: MultipartBody.Part,
+        persentaseProgress: RequestBody,
+        detailProgress: RequestBody,
+    ): Call<DataUpdatePembangunanResponse> {
+        return apiService.newUpdateStatusPembangunan(idRumah,
+            file,
+            persentaseProgress,
+            detailProgress)
     }
 
     fun updateStatusBooking(

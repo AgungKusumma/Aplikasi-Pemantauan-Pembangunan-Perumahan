@@ -91,13 +91,13 @@ class HomeAdminActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.fabLogout.setOnClickListener {
             val alert = AlertDialog.Builder(this)
-            alert.setTitle("Logout")
-            alert.setMessage("Anda yakin ingin mengeluarkan akun?")
-                .setPositiveButton("Ya") { _, _ ->
+            alert.setTitle(getString(R.string.logout))
+            alert.setMessage(getString(R.string.logout_message))
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
                     mainViewModel.logout()
                     Toast.makeText(this,
                         getString(R.string.logout_success), Toast.LENGTH_LONG).show()
-                }.setNegativeButton("Tidak", null)
+                }.setNegativeButton(getString(R.string.no), null)
 
             val alert1 = alert.create()
             alert1.show()

@@ -5,9 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.capstoneproject.basnasejahtera.admin.KelolaAkunAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataKonsumenBinding
-import com.capstoneproject.basnasejahtera.konsumen.KelolaAkunKonsumenActivity
 import com.capstoneproject.basnasejahtera.model.DataKonsumenResponseItem
 
 class ListDataAkunAdapter :
@@ -55,10 +56,17 @@ class ListDataAkunAdapter :
                 }
 
                 itemView.setOnClickListener {
-                    val intent =
-                        Intent(itemView.context, KelolaAkunKonsumenActivity::class.java)
-                    intent.putExtra("idAkun", dataAkun.id)
-                    itemView.context.startActivity(intent)
+                    if (dataAkun.dataBooking == null) {
+                        Toast.makeText(itemView.context,
+                            "Hanya bisa mengubah data konsumen yang sudah memiliki rumah\n\nPilih Konsumen yang lain",
+                            Toast.LENGTH_LONG).show()
+                    } else {
+                        val intent =
+                            Intent(itemView.context, KelolaAkunAdminActivity::class.java)
+                        intent.putExtra("idRumah", dataAkun.id)
+                        intent.putExtra("idAkun", dataAkun.idAkun)
+                        itemView.context.startActivity(intent)
+                    }
                 }
             }
         }

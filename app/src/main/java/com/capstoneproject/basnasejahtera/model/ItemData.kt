@@ -15,3 +15,9 @@ data class ItemDataPanduan(
     var data: String,
     var detailData: String,
 ) : Parcelable
+
+@Parcelize
+data class ItemDataProgress(
+    var persentase: Int,
+    var detailProgress: String,
+) : Parcelable

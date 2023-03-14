@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,19 +18,28 @@ import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateStatusPembangunanBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
+import com.capstoneproject.basnasejahtera.main.viewmodel.DetailDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.UpdateStatusViewModel
-import com.capstoneproject.basnasejahtera.model.DataStatus
+import com.capstoneproject.basnasejahtera.model.DataIDRumah
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 import com.capstoneproject.basnasejahtera.utils.createCustomTempFile
+import com.capstoneproject.basnasejahtera.utils.reduceFileImage
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class UpdateStatusPembangunanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateStatusPembangunanBinding
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var detailDataViewModel: DetailDataViewModel
     private lateinit var updateStatusViewModel: UpdateStatusViewModel
     private lateinit var currentPhotoPath: String
+    private lateinit var rumah: DataIDRumah
     private var getFile: File? = null
 
     override fun onRequestPermissionsResult(
@@ -69,11 +79,14 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
+        val idRumah = intent.getIntExtra("idRumah", 0)
+
         mainViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[MainViewModel::class.java]
 
+        detailDataViewModel = DetailDataViewModel.getInstance(this)
         updateStatusViewModel = UpdateStatusViewModel.getInstance(this)
 
         val pengawas = getString(R.string.role_pengawas)
@@ -84,55 +97,136 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        if (idRumah != 0) {
+            mainViewModel.saveIDRumah(idRumah)
+        }
+
+        mainViewModel.getIDRumah().observe(this) { rumah ->
+            this.rumah = rumah
+            rumah.id?.let { detailDataViewModel.getDataRumah(it) }
+        }
     }
 
     private fun setupData() {
-        val nomorRumah = intent.getStringExtra("nomorRumah")
-        val progressPembangunan = intent.getIntExtra("progress", 0)
+        detailDataViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
 
-        "Nomor Rumah : $nomorRumah".also { binding.tvNomorRumah.text = it }
-        "Progress Pembangunan saat ini : $progressPembangunan%".also {
-            binding.tvProgress.text = it
+        detailDataViewModel.dataRumah.observe(this) { rumah ->
+            val nomorRumah = rumah.nomorRumah
+            val progressPembangunan = rumah.progressPembangunan
+            val detailProgress = rumah.detailsProgressPembangunan
+
+            binding.apply {
+                "Nomor Rumah : $nomorRumah".also { tvNomorRumah.text = it }
+                "Progress Pembangunan saat ini : $progressPembangunan%".also {
+                    tvProgress.text = it
+                }
+                tvDetailProgress.visibility = View.GONE
+                if (detailProgress != null) {
+                    tvDetailProgress.visibility = View.VISIBLE
+                    "Detail Progress Pembangunan saat ini : $detailProgress".also {
+                        tvDetailProgress.text = it
+                    }
+                }
+            }
         }
     }
 
     private fun setupAction() {
-        val idRumah = intent.getIntExtra("idRumah", 0)
-        val progress = binding.statusPembangunanEditText.text
+        val persentaseProgress = intent.getIntExtra("persentaseProgress", 0)
+        val detailProgress = intent.getStringExtra("detailProgress")
 
         binding.apply {
+            if (persentaseProgress != 0 || detailProgress != null) {
+                tvNewProgress.visibility = View.VISIBLE
+                tvNewDetailProgress.visibility = View.VISIBLE
+                cameraButton.visibility = View.VISIBLE
+                progressButton.visibility = View.GONE
+
+                "Progress Pembangunan Terbaru : $persentaseProgress%".also {
+                    tvNewProgress.text = it
+                }
+                "Detail Progress Pembangunan Terbaru : $detailProgress".also {
+                    tvNewDetailProgress.text = it
+                }
+            }
+
+            progressButton.setOnClickListener {
+                val intent =
+                    Intent(this@UpdateStatusPembangunanActivity,
+                        UpdateProgressPengawasActivity::class.java)
+                startActivity(intent)
+            }
             cameraButton.setOnClickListener { startTakePhoto() }
-
             saveButton.setOnClickListener {
-                val progress1 = progress.toString().toInt()
-                val data = DataStatus(progress1)
+                updateStatusPembangunan(
+                    persentaseProgress.toString(), detailProgress.toString()
+                )
+            }
+        }
+    }
 
-                updateStatusViewModel.updateStatusPembangunan(idRumah, data)
-                updateStatusViewModel.error.observe(this@UpdateStatusPembangunanActivity) { event ->
-                    event.getContentIfNotHandled()?.let { error ->
-                        if (!error) {
-                            updateStatusViewModel.data.observe(this@UpdateStatusPembangunanActivity) { event ->
-                                event.getContentIfNotHandled()?.let {
-                                    Toast.makeText(this@UpdateStatusPembangunanActivity,
-                                        getString(R.string.success_update_status_pembangunan),
-                                        Toast.LENGTH_LONG).show()
-                                    val intent =
-                                        Intent(this@UpdateStatusPembangunanActivity,
-                                            HomePengawasActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                    startActivity(intent)
-                                    finish()
-                                }
-                            }
-                        } else {
-                            Toast.makeText(this@UpdateStatusPembangunanActivity,
-                                getString(R.string.update_failed),
-                                Toast.LENGTH_LONG).show()
-                        }
+    private fun updateStatusPembangunan(persen: String, detail: String) {
+        if (getFile != null) {
+            val file = reduceFileImage(getFile as File)
+
+            val persentaseProgress = persen.toRequestBody("text/plain".toMediaType())
+            val detailProgress = detail.toRequestBody("text/plain".toMediaType())
+            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "image",
+                file.name,
+                requestImageFile
+            )
+
+            updateStatusViewModel.isLoading.observe(this) {
+                showLoading(it)
+            }
+
+            mainViewModel.getIDRumah().observe(this@UpdateStatusPembangunanActivity) { rumah ->
+                updateStatusViewModel.newUpdateStatusPembangunan(
+                    rumah.id!!, imageMultipart, persentaseProgress, detailProgress
+                )
+            }
+
+            updateStatusViewModel.error.observe(this) { event ->
+                event.getContentIfNotHandled()?.let { error ->
+                    if (!error) {
+                        Toast.makeText(this,
+                            getString(R.string.success_update_status_pembangunan),
+                            Toast.LENGTH_LONG).show()
+                        val intent =
+                            Intent(this@UpdateStatusPembangunanActivity,
+                                HomePengawasActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this,
+                            getString(R.string.update_failed),
+                            Toast.LENGTH_LONG).show()
                     }
                 }
             }
+
+            updateStatusViewModel.message.observe(this) { event ->
+                event.getContentIfNotHandled()?.let {
+                    val msg = getString(R.string.update_failed)
+                    val msg1 = getString(R.string.network_error)
+                    Toast.makeText(this, "$msg \n$msg1", Toast.LENGTH_LONG)
+                        .show()
+                    showLoading(false)
+                }
+            }
+        } else {
+            val msg = getString(R.string.empty_progress)
+            val msg1 = getString(R.string.empty_image)
+            Toast.makeText(this,
+                "$msg atau\n$msg1",
+                Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -150,6 +244,8 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             launcherIntentCamera.launch(intent)
         }
+
+
     }
 
     private val launcherIntentCamera = registerForActivityResult(
@@ -162,6 +258,10 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
             val result = BitmapFactory.decodeFile(getFile?.path)
             binding.previewImage.setImageBitmap(result)
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     @Suppress("DEPRECATION")

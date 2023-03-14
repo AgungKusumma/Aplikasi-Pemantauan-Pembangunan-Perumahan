@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import com.capstoneproject.basnasejahtera.model.*
 import com.capstoneproject.basnasejahtera.utils.Event
 import com.capstoneproject.basnasejahtera.utils.Injection
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,22 +18,36 @@ class UpdateStatusViewModel(private val userRepository: UserRepository) : ViewMo
     private val _data = MutableLiveData<Event<DataUpdateResponse>>()
     val data: LiveData<Event<DataUpdateResponse>> = _data
 
+    private val _dataPembangunan = MutableLiveData<Event<DataUpdatePembangunanResponse>>()
+
     private var _message = MutableLiveData<Event<String>>()
+    val message: LiveData<Event<String>> = _message
 
     private var _error = MutableLiveData<Event<Boolean>>()
     val error: LiveData<Event<Boolean>> = _error
 
-    fun updateStatusPembangunan(idRumah: Int, statusPembangunan: DataStatus) {
-        val client = userRepository.updateStatusPembangunan(idRumah, statusPembangunan)
-        client.enqueue(object : Callback<DataUpdateResponse> {
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    fun newUpdateStatusPembangunan(
+        idRumah: Int,
+        photo: MultipartBody.Part,
+        persentaseProgress: RequestBody,
+        detailProgress: RequestBody,
+    ) {
+        _isLoading.value = true
+        val client = userRepository.newUpdateStatusPembangunan(
+            idRumah, photo, persentaseProgress, detailProgress
+        )
+        client.enqueue(object : Callback<DataUpdatePembangunanResponse> {
             override fun onResponse(
-                call: Call<DataUpdateResponse>,
-                response: Response<DataUpdateResponse>,
+                call: Call<DataUpdatePembangunanResponse>,
+                response: Response<DataUpdatePembangunanResponse>,
             ) {
                 if (response.isSuccessful) {
                     _error.value = Event(false)
                     userRepository.appExecutors.networkIO.execute {
-                        _data.postValue(Event(response.body()!!))
+                        _dataPembangunan.postValue(Event(response.body()!!))
                     }
                 } else {
                     Log.e(PEMBANGUNAN, "onResponse fail: ${response.message()}")
@@ -40,7 +56,7 @@ class UpdateStatusViewModel(private val userRepository: UserRepository) : ViewMo
                 }
             }
 
-            override fun onFailure(call: Call<DataUpdateResponse>, t: Throwable) {
+            override fun onFailure(call: Call<DataUpdatePembangunanResponse>, t: Throwable) {
                 Log.e(PEMBANGUNAN, "onFailure: " + t.message)
                 _message.value = Event(t.message.toString())
                 _error.value = Event(true)

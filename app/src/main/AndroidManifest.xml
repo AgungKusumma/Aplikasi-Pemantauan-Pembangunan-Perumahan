@@ -16,6 +16,16 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,6 +37,13 @@
         android:theme="@style/Theme.BasnaSejahtera"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".pengawas.UpdateProgressPengawasActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".admin.MainKelolaAkunActivity"
             android:exported="false">
@@ -91,7 +108,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".konsumen.KelolaAkunKonsumenActivity"
+            android:name=".admin.KelolaAkunAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -172,13 +189,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="https" />
-        </intent>
-    </queries>
 
 </manifest>
