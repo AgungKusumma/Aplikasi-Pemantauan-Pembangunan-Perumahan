@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.admin.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.admin.DataRumahAdminActivity
-import com.capstoneproject.basnasejahtera.admin.MainKelolaAkunActivity
+import com.capstoneproject.basnasejahtera.admin.activity.DataRumahAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.MainKelolaAkunActivity
 import com.capstoneproject.basnasejahtera.authentication.signup.SignupActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.model.ItemData

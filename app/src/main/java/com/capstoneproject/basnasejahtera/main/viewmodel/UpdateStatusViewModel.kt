@@ -91,6 +91,33 @@ class UpdateStatusViewModel(private val userRepository: UserRepository) : ViewMo
         })
     }
 
+    fun updateDataAkunAdmin(idAkun: Int, dataUpdateAkun: DataUpdateAkunAdmin) {
+        val client = userRepository.updateDataAkunAdmin(idAkun, dataUpdateAkun)
+        client.enqueue(object : Callback<DataUpdateResponse> {
+            override fun onResponse(
+                call: Call<DataUpdateResponse>,
+                response: Response<DataUpdateResponse>,
+            ) {
+                if (response.isSuccessful) {
+                    _error.value = Event(false)
+                    userRepository.appExecutors.networkIO.execute {
+                        _data.postValue(Event(response.body()!!))
+                    }
+                } else {
+                    Log.e(PEMBANGUNAN, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                    _error.value = Event(true)
+                }
+            }
+
+            override fun onFailure(call: Call<DataUpdateResponse>, t: Throwable) {
+                Log.e(PEMBANGUNAN, "onFailure: " + t.message)
+                _message.value = Event(t.message.toString())
+                _error.value = Event(true)
+            }
+        })
+    }
+
     fun updateStatusBooking(idRumah: Int, statusBooking: DataUpdateBooking) {
         val client = userRepository.updateStatusBooking(idRumah, statusBooking)
         client.enqueue(object : Callback<DataUpdateResponse> {

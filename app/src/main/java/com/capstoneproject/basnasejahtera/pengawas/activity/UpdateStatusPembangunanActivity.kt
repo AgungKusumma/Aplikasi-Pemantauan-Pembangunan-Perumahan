@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.pengawas
+package com.capstoneproject.basnasejahtera.pengawas.activity
 
 import android.Manifest
 import android.content.Intent
