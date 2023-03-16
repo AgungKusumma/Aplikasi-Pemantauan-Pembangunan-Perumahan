@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.databinding.ActivitySignupBinding
 

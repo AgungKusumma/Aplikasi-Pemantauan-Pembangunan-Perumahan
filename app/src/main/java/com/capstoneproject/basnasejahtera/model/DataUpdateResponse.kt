@@ -84,9 +84,6 @@ data class DataUpdateAkun(
     @field:SerializedName("noHp")
     val noHp: String,
 
-    @field:SerializedName("role")
-    val role: String,
-
     @field:SerializedName("nik")
     val nik: String,
 
@@ -95,4 +92,16 @@ data class DataUpdateAkun(
 
     @field:SerializedName("alamat")
     val alamat: String,
+) : Parcelable
+
+@Parcelize
+data class DataUpdateAkunAdmin(
+    @field:SerializedName("email")
+    val email: String,
+
+    @field:SerializedName("kataSandi")
+    val kataSandi: String,
+
+    @field:SerializedName("nama")
+    val nama: String,
 ) : Parcelable

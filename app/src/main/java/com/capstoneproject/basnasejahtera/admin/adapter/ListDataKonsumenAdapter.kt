@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.admin.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.capstoneproject.basnasejahtera.admin.UpdateBookingAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.UpdateBookingAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataKonsumenBinding
 import com.capstoneproject.basnasejahtera.model.DataKonsumenResponseItem
 
@@ -56,21 +56,25 @@ class ListDataKonsumenAdapter :
                 }
 
                 itemView.setOnClickListener {
-                    if (statusBooking == "terjual") {
-                        Toast.makeText(itemView.context,
-                            "Konsumen sudah membeli rumah\nPilih Konsumen yang lain",
-                            Toast.LENGTH_LONG).show()
-                    } else if (statusBooking == "di booking") {
-                        Toast.makeText(itemView.context,
-                            "Konsumen sudah booking rumah\nPilih Konsumen yang lain",
-                            Toast.LENGTH_LONG).show()
-                    } else {
-                        val intent =
-                            Intent(itemView.context, UpdateBookingAdminActivity::class.java)
-                        intent.putExtra("idKonsumen", dataKonsumen.id)
-                        intent.putExtra("namaKonsumen", dataKonsumen.dataAkun?.nama)
-                        intent.putExtra("emailKonsumen", dataKonsumen.dataAkun?.email)
-                        itemView.context.startActivity(intent)
+                    when (statusBooking) {
+                        "terjual" -> {
+                            Toast.makeText(itemView.context,
+                                "Konsumen sudah membeli rumah\nPilih Konsumen yang lain",
+                                Toast.LENGTH_LONG).show()
+                        }
+                        "di booking" -> {
+                            Toast.makeText(itemView.context,
+                                "Konsumen sudah booking rumah\nPilih Konsumen yang lain",
+                                Toast.LENGTH_LONG).show()
+                        }
+                        else -> {
+                            val intent =
+                                Intent(itemView.context, UpdateBookingAdminActivity::class.java)
+                            intent.putExtra("idKonsumen", dataKonsumen.id)
+                            intent.putExtra("namaKonsumen", dataKonsumen.dataAkun?.nama)
+                            intent.putExtra("emailKonsumen", dataKonsumen.dataAkun?.email)
+                            itemView.context.startActivity(intent)
+                        }
                     }
                 }
             }

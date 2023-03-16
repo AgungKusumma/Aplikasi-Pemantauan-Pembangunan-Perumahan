@@ -38,49 +38,49 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".pengawas.UpdateProgressPengawasActivity"
+            android:name=".pengawas.activity.UpdateProgressPengawasActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.MainKelolaAkunActivity"
+            android:name=".admin.activity.MainKelolaAkunActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".pengawas.HomePengawasActivity"
+            android:name=".pengawas.activity.HomePengawasActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.UpdateRumahAdminActivity"
+            android:name=".admin.activity.UpdateRumahAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.UpdateBookingAdminActivity"
+            android:name=".admin.activity.UpdateBookingAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.DataRumahAdminActivity"
+            android:name=".admin.activity.DataRumahAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.MainAdminActivity"
+            android:name=".admin.activity.MainAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -94,42 +94,42 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".pengawas.MainPengawasActivity"
+            android:name=".pengawas.activity.MainPengawasActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".pengawas.UpdateStatusPembangunanActivity"
+            android:name=".pengawas.activity.UpdateStatusPembangunanActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.KelolaAkunAdminActivity"
+            android:name=".admin.activity.KelolaAkunAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".admin.HomeAdminActivity"
+            android:name=".admin.activity.HomeAdminActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".konsumen.PanduanActivity"
+            android:name=".konsumen.activity.PanduanActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".konsumen.HomeKonsumenActivity"
+            android:name=".konsumen.activity.HomeKonsumenActivity"
             android:exported="false" />
         <activity
             android:name=".main.activity.SplashScreenActivity"
@@ -152,9 +152,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".konsumen.DetailKonsumenActivity"
+            android:name=".konsumen.activity.DetailKonsumenActivity"
             android:exported="false"
-            android:parentActivityName=".konsumen.HomeKonsumenActivity">
+            android:parentActivityName=".konsumen.activity.HomeKonsumenActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

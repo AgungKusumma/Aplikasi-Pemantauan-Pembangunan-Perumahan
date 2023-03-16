@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.pengawas.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstoneproject.basnasejahtera.databinding.ItemRowPembangunanBinding
 import com.capstoneproject.basnasejahtera.model.ItemDataProgress
-import com.capstoneproject.basnasejahtera.pengawas.UpdateStatusPembangunanActivity
+import com.capstoneproject.basnasejahtera.pengawas.activity.UpdateStatusPembangunanActivity
 
 class ListDataProgressAdapter(private val listData: ArrayList<ItemDataProgress>) :
     RecyclerView.Adapter<ListDataProgressAdapter.ListViewHolder>() {

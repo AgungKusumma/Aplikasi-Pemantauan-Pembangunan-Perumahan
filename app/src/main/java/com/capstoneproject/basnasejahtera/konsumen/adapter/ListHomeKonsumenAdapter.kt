@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.konsumen.adapter
 
 import android.content.Intent
 import android.net.Uri
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
-import com.capstoneproject.basnasejahtera.konsumen.DetailKonsumenActivity
-import com.capstoneproject.basnasejahtera.konsumen.PanduanActivity
+import com.capstoneproject.basnasejahtera.konsumen.activity.DetailKonsumenActivity
+import com.capstoneproject.basnasejahtera.konsumen.activity.PanduanActivity
 import com.capstoneproject.basnasejahtera.model.ItemData
 
 class ListHomeKonsumenAdapter(private val listData: ArrayList<ItemData>) :

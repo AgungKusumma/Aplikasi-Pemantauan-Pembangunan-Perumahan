@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.konsumen
+package com.capstoneproject.basnasejahtera.konsumen.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ActivityPanduanBinding
+import com.capstoneproject.basnasejahtera.konsumen.adapter.ListDataPanduanAdapter
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataPanduanAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.ItemDataPanduan
 import com.capstoneproject.basnasejahtera.model.UserPreference

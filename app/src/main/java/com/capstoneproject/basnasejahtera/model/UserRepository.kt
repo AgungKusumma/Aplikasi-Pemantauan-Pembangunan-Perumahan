@@ -83,9 +83,25 @@ class UserRepository private constructor(
         return apiService.updateDataAkun(idAkun, dataAkun)
     }
 
+    fun updateDataAkunAdmin(
+        idAkun: Int,
+        dataAkun: DataUpdateAkunAdmin,
+    ): Call<DataUpdateResponse> {
+        return apiService.updateDataAkunAdmin(idAkun, dataAkun)
+    }
+
     fun getAllDataKonsumen(): Call<List<DataKonsumenResponseItem>> {
         return apiService.getAllDataKonsumen()
     }
+
+    fun getAllDataAkun(): Call<DataAkunResponse> {
+        return apiService.getAllDataAkun()
+    }
+
+    fun getDetailDataAkun(idAkun: Int): Call<DataDetailAkunResponse> {
+        return apiService.getDetailDataAkun(idAkun)
+    }
+
 
     companion object {
         @Volatile

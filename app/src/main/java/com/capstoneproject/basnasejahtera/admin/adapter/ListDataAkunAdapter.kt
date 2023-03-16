@@ -1,22 +1,21 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.admin.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.capstoneproject.basnasejahtera.admin.KelolaAkunAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.KelolaAkunAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataKonsumenBinding
-import com.capstoneproject.basnasejahtera.model.DataKonsumenResponseItem
+import com.capstoneproject.basnasejahtera.model.SeluruhAkunItem
 
 class ListDataAkunAdapter :
     RecyclerView.Adapter<ListDataAkunAdapter.ListViewHolder>() {
-    private var listDataAkun = ArrayList<DataKonsumenResponseItem>()
+    private var listDataAkun = ArrayList<SeluruhAkunItem>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setlistDataAkun(data: List<DataKonsumenResponseItem>) {
+    fun setlistDataAkun(data: List<SeluruhAkunItem>) {
         listDataAkun.clear()
         listDataAkun.addAll(data)
         notifyDataSetChanged()
@@ -36,12 +35,12 @@ class ListDataAkunAdapter :
 
     class ListViewHolder(private val binding: ItemRowDataKonsumenBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(dataAkun: DataKonsumenResponseItem) {
+        fun bind(dataAkun: SeluruhAkunItem) {
             val statusBooking = dataAkun.dataBooking?.statusBooking
 
             binding.apply {
-                tvNama.text = dataAkun.dataAkun?.nama
-                tvEmail.text = dataAkun.dataAkun?.email
+                tvNama.text = dataAkun.nama
+                tvEmail.text = dataAkun.email
 
                 when (statusBooking) {
                     "terjual" -> {
@@ -56,17 +55,11 @@ class ListDataAkunAdapter :
                 }
 
                 itemView.setOnClickListener {
-                    if (dataAkun.dataBooking == null) {
-                        Toast.makeText(itemView.context,
-                            "Hanya bisa mengubah data konsumen yang sudah memiliki rumah\n\nPilih Konsumen yang lain",
-                            Toast.LENGTH_LONG).show()
-                    } else {
-                        val intent =
-                            Intent(itemView.context, KelolaAkunAdminActivity::class.java)
-                        intent.putExtra("idRumah", dataAkun.id)
-                        intent.putExtra("idAkun", dataAkun.idAkun)
-                        itemView.context.startActivity(intent)
-                    }
+                    val intent =
+                        Intent(itemView.context, KelolaAkunAdminActivity::class.java)
+                    intent.putExtra("idAkun", dataAkun.id)
+                    intent.putExtra("role", dataAkun.role)
+                    itemView.context.startActivity(intent)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.admin
+package com.capstoneproject.basnasejahtera.admin.activity
 
 import android.content.Intent
 import android.os.Build
@@ -10,20 +10,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
+import com.capstoneproject.basnasejahtera.admin.adapter.ListDataKonsumenAdapter
 import com.capstoneproject.basnasejahtera.databinding.ActivityMainAdminBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataAkunAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-class MainKelolaAkunActivity : AppCompatActivity() {
+class MainAdminActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
-    private lateinit var adapter: ListDataAkunAdapter
+    private lateinit var adapter: ListDataKonsumenAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +67,10 @@ class MainKelolaAkunActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        adapter = ListDataAkunAdapter()
+        adapter = ListDataKonsumenAdapter()
 
         binding.apply {
-            rvItemKonsumen.layoutManager = GridLayoutManager(this@MainKelolaAkunActivity, 2)
+            rvItemKonsumen.layoutManager = GridLayoutManager(this@MainAdminActivity, 2)
             rvItemKonsumen.setHasFixedSize(true)
             rvItemKonsumen.adapter = adapter
         }
@@ -82,7 +82,7 @@ class MainKelolaAkunActivity : AppCompatActivity() {
         }
 
         mainDataViewModel.dataKonsumen.observe(this) {
-            adapter.setlistDataAkun(it)
+            adapter.setListDataKonsumen(it)
         }
 
         mainDataViewModel.error.observe(this) { event ->

@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.admin.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.capstoneproject.basnasejahtera.admin.UpdateBookingAdminActivity
-import com.capstoneproject.basnasejahtera.admin.UpdateRumahAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.UpdateBookingAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.UpdateRumahAdminActivity
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
 

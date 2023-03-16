@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.pengawas.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
-import com.capstoneproject.basnasejahtera.pengawas.UpdateStatusPembangunanActivity
+import com.capstoneproject.basnasejahtera.pengawas.activity.UpdateStatusPembangunanActivity
 
 class ListDataRumahPengawasAdapter :
     RecyclerView.Adapter<ListDataRumahPengawasAdapter.ListViewHolder>() {

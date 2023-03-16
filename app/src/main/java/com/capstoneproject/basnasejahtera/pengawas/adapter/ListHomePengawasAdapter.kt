@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.main.adapter
+package com.capstoneproject.basnasejahtera.pengawas.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.capstoneproject.basnasejahtera.R
 import com.capstoneproject.basnasejahtera.databinding.ItemRowDataBinding
 import com.capstoneproject.basnasejahtera.model.ItemData
-import com.capstoneproject.basnasejahtera.pengawas.MainPengawasActivity
+import com.capstoneproject.basnasejahtera.pengawas.activity.MainPengawasActivity
 
 class ListHomePengawasAdapter(private val listData: ArrayList<ItemData>) :
     RecyclerView.Adapter<ListHomePengawasAdapter.ListViewHolder>() {

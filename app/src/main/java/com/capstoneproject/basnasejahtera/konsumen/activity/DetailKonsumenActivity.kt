@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.konsumen
+package com.capstoneproject.basnasejahtera.konsumen.activity
 
 import android.content.Intent
 import android.graphics.Color

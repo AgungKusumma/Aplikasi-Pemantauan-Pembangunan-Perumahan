@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstoneproject.basnasejahtera.model.DataBlokRumahResponseItem
-import com.capstoneproject.basnasejahtera.model.DataKonsumenResponseItem
-import com.capstoneproject.basnasejahtera.model.DataRumahResponseItem
-import com.capstoneproject.basnasejahtera.model.UserRepository
+import com.capstoneproject.basnasejahtera.model.*
 import com.capstoneproject.basnasejahtera.utils.Event
 import com.capstoneproject.basnasejahtera.utils.Injection
 import retrofit2.Call
@@ -22,6 +19,12 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
 
     private var _dataKonsumen = MutableLiveData<List<DataKonsumenResponseItem>>()
     val dataKonsumen: LiveData<List<DataKonsumenResponseItem>> = _dataKonsumen
+
+    private var _dataAkun = MutableLiveData<DataAkunResponse>()
+    val dataAkun: LiveData<DataAkunResponse> = _dataAkun
+
+    private var _detailDataAkun = MutableLiveData<DataDetailAkunResponse>()
+    val detailDataAkun: LiveData<DataDetailAkunResponse> = _detailDataAkun
 
     private var _dataBlok = MutableLiveData<List<DataBlokRumahResponseItem>>()
     val dataBlok: LiveData<List<DataBlokRumahResponseItem>> = _dataBlok
@@ -115,6 +118,66 @@ class MainDataViewModel(private val userRepository: UserRepository) : ViewModel(
 
             override fun onFailure(
                 call: Call<List<DataKonsumenResponseItem>>,
+                t: Throwable,
+            ) {
+                Log.e(TAG, "onFailure: " + t.message)
+                _isLoading.value = false
+                _message.value = Event(t.message.toString())
+            }
+        })
+    }
+
+    fun getAllDataAkun() {
+        _isLoading.value = true
+        val client = userRepository.getAllDataAkun()
+        client.enqueue(object : Callback<DataAkunResponse> {
+            override fun onResponse(
+                call: Call<DataAkunResponse>,
+                response: Response<DataAkunResponse>,
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    userRepository.appExecutors.networkIO.execute {
+                        _dataAkun.postValue(response.body()!!)
+                    }
+                } else {
+                    Log.e(TAG, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                }
+            }
+
+            override fun onFailure(
+                call: Call<DataAkunResponse>,
+                t: Throwable,
+            ) {
+                Log.e(TAG, "onFailure: " + t.message)
+                _isLoading.value = false
+                _message.value = Event(t.message.toString())
+            }
+        })
+    }
+
+    fun getDetailDataAkun(idAkun: Int) {
+        _isLoading.value = true
+        val client = userRepository.getDetailDataAkun(idAkun)
+        client.enqueue(object : Callback<DataDetailAkunResponse> {
+            override fun onResponse(
+                call: Call<DataDetailAkunResponse>,
+                response: Response<DataDetailAkunResponse>,
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    userRepository.appExecutors.networkIO.execute {
+                        _detailDataAkun.postValue(response.body()!!)
+                    }
+                } else {
+                    Log.e(TAG, "onResponse fail: ${response.message()}")
+                    _message.value = Event(response.message())
+                }
+            }
+
+            override fun onFailure(
+                call: Call<DataDetailAkunResponse>,
                 t: Throwable,
             ) {
                 Log.e(TAG, "onFailure: " + t.message)

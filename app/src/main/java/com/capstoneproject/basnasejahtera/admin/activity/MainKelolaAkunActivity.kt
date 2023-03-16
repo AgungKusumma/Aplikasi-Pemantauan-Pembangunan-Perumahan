@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.admin
+package com.capstoneproject.basnasejahtera.admin.activity
 
 import android.content.Intent
 import android.os.Build
@@ -10,24 +10,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.databinding.ActivityDataRumahAdminBinding
+import com.capstoneproject.basnasejahtera.admin.adapter.ListDataAkunAdapter
+import com.capstoneproject.basnasejahtera.databinding.ActivityMainAdminBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataRumahAdminAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
+import com.capstoneproject.basnasejahtera.model.SeluruhAkunItem
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-class DataRumahAdminActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDataRumahAdminBinding
+class MainKelolaAkunActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
-    private lateinit var adapter: ListDataRumahAdminAdapter
+    private lateinit var adapter: ListDataAkunAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDataRumahAdminBinding.inflate(layoutInflater)
+        binding = ActivityMainAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
@@ -66,29 +67,30 @@ class DataRumahAdminActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun showRecyclerList() {
-        adapter = ListDataRumahAdminAdapter()
+        adapter = ListDataAkunAdapter()
 
         binding.apply {
-            rvItemHouse.layoutManager = GridLayoutManager(this@DataRumahAdminActivity, 2)
-            rvItemHouse.setHasFixedSize(true)
-            rvItemHouse.adapter = adapter
+            rvItemKonsumen.layoutManager = GridLayoutManager(this@MainKelolaAkunActivity, 2)
+            rvItemKonsumen.setHasFixedSize(true)
+            rvItemKonsumen.adapter = adapter
         }
 
-        mainDataViewModel.getAllDataRumah()
+        mainDataViewModel.getAllDataAkun()
 
         mainDataViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        mainDataViewModel.dataRumah.observe(this) {
-            adapter.setListRumahAdmin(it)
+        mainDataViewModel.dataAkun.observe(this) {
+            adapter.setlistDataAkun(it.data?.seluruhAkun as List<SeluruhAkunItem>)
         }
 
         mainDataViewModel.error.observe(this) { event ->
             event.getContentIfNotHandled()?.let { error ->
                 if (error) {
-                    binding.rvItemHouse.adapter = null
+                    binding.rvItemKonsumen.adapter = null
                 }
             }
         }

@@ -15,17 +15,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.admin.HomeAdminActivity
+import com.capstoneproject.basnasejahtera.admin.activity.HomeAdminActivity
 import com.capstoneproject.basnasejahtera.authentication.AuthenticationViewModel
 import com.capstoneproject.basnasejahtera.databinding.ActivityLoginBinding
-import com.capstoneproject.basnasejahtera.konsumen.HomeKonsumenActivity
+import com.capstoneproject.basnasejahtera.konsumen.activity.HomeKonsumenActivity
 import com.capstoneproject.basnasejahtera.main.activity.HomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.model.DataKonsumen
 import com.capstoneproject.basnasejahtera.model.UserModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
-import com.capstoneproject.basnasejahtera.pengawas.HomePengawasActivity
+import com.capstoneproject.basnasejahtera.pengawas.activity.HomePengawasActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 

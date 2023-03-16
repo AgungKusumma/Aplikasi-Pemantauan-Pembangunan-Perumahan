@@ -59,6 +59,20 @@ interface ApiService {
         @Body dataAkun: DataUpdateAkun,
     ): Call<DataUpdateResponse>
 
+    @PUT("akun/{idAkun}/")
+    fun updateDataAkunAdmin(
+        @Path("idAkun") idAkun: Int,
+        @Body dataAkun: DataUpdateAkunAdmin,
+    ): Call<DataUpdateResponse>
+
     @GET("kustomer")
     fun getAllDataKonsumen(): Call<List<DataKonsumenResponseItem>>
+
+    @GET("seluruh-akun")
+    fun getAllDataAkun(): Call<DataAkunResponse>
+
+    @GET("akun/{idAkun}/")
+    fun getDetailDataAkun(
+        @Path("idAkun") idAkun: Int,
+    ): Call<DataDetailAkunResponse>
 }

@@ -1,32 +1,33 @@
-package com.capstoneproject.basnasejahtera.pengawas
+package com.capstoneproject.basnasejahtera.pengawas.activity
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.databinding.ActivityUpdateProgressPengawasBinding
+import com.capstoneproject.basnasejahtera.databinding.ActivityMainBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataProgressAdapter
+import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
-import com.capstoneproject.basnasejahtera.model.ItemDataProgress
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
+import com.capstoneproject.basnasejahtera.pengawas.adapter.ListDataRumahPengawasAdapter
 
-class UpdateProgressPengawasActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityUpdateProgressPengawasBinding
+class MainPengawasActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: ListDataProgressAdapter
-    private var list = ArrayList<ItemDataProgress>()
+    private lateinit var mainDataViewModel: MainDataViewModel
+    private lateinit var adapter: ListDataRumahPengawasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUpdateProgressPengawasBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
@@ -53,6 +54,8 @@ class UpdateProgressPengawasActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[MainViewModel::class.java]
 
+        mainDataViewModel = MainDataViewModel.getInstance(this)
+
         val pengawas = getString(R.string.role_pengawas)
 
         mainViewModel.getUser().observe(this) { user ->
@@ -64,26 +67,34 @@ class UpdateProgressPengawasActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        list.addAll(listData)
-
-        adapter = ListDataProgressAdapter(list)
+        adapter = ListDataRumahPengawasAdapter()
 
         binding.apply {
-            rvItemHouse.layoutManager = LinearLayoutManager(this@UpdateProgressPengawasActivity)
+            rvItemHouse.layoutManager = GridLayoutManager(this@MainPengawasActivity, 2)
             rvItemHouse.setHasFixedSize(true)
             rvItemHouse.adapter = adapter
         }
+
+        mainDataViewModel.getAllDataRumah()
+
+        mainDataViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        mainDataViewModel.dataRumah.observe(this) {
+            adapter.setListRumahPengawas(it)
+        }
+
+        mainDataViewModel.error.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { error ->
+                if (error) {
+                    binding.rvItemHouse.adapter = null
+                }
+            }
+        }
     }
 
-    private val listData: ArrayList<ItemDataProgress>
-        get() {
-            val dataPersentase = resources.getIntArray(R.array.persentase_progress)
-            val dataDetailProgress = resources.getStringArray(R.array.detail_progress)
-            val listData = ArrayList<ItemDataProgress>()
-            for (i in dataPersentase.indices) {
-                val data = ItemDataProgress(dataPersentase[i], dataDetailProgress[i])
-                listData.add(data)
-            }
-            return listData
-        }
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }

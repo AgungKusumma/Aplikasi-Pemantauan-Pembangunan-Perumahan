@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.admin
+package com.capstoneproject.basnasejahtera.admin.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
+import com.capstoneproject.basnasejahtera.admin.adapter.ListHomeAdminAdapter
 import com.capstoneproject.basnasejahtera.databinding.ActivityHomeKonsumenBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListHomeAdminAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.ItemData
 import com.capstoneproject.basnasejahtera.model.UserPreference

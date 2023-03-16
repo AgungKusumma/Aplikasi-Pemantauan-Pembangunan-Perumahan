@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.admin
+package com.capstoneproject.basnasejahtera.admin.activity
 
 import android.content.Intent
 import android.os.Bundle

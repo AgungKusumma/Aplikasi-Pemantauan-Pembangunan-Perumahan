@@ -1,4 +1,4 @@
-package com.capstoneproject.basnasejahtera.admin
+package com.capstoneproject.basnasejahtera.admin.activity
 
 import android.content.Intent
 import android.os.Build
@@ -10,24 +10,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstoneproject.basnasejahtera.R
-import com.capstoneproject.basnasejahtera.databinding.ActivityMainAdminBinding
+import com.capstoneproject.basnasejahtera.admin.adapter.ListDataRumahAdminAdapter
+import com.capstoneproject.basnasejahtera.databinding.ActivityDataRumahAdminBinding
 import com.capstoneproject.basnasejahtera.main.activity.WelcomeActivity
 import com.capstoneproject.basnasejahtera.main.activity.dataStore
-import com.capstoneproject.basnasejahtera.main.adapter.ListDataKonsumenAdapter
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainDataViewModel
 import com.capstoneproject.basnasejahtera.main.viewmodel.MainViewModel
 import com.capstoneproject.basnasejahtera.model.UserPreference
 import com.capstoneproject.basnasejahtera.model.ViewModelFactory
 
-class MainAdminActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainAdminBinding
+class DataRumahAdminActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDataRumahAdminBinding
     private lateinit var mainViewModel: MainViewModel
     private lateinit var mainDataViewModel: MainDataViewModel
-    private lateinit var adapter: ListDataKonsumenAdapter
+    private lateinit var adapter: ListDataRumahAdminAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainAdminBinding.inflate(layoutInflater)
+        binding = ActivityDataRumahAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
@@ -67,28 +67,28 @@ class MainAdminActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-        adapter = ListDataKonsumenAdapter()
+        adapter = ListDataRumahAdminAdapter()
 
         binding.apply {
-            rvItemKonsumen.layoutManager = GridLayoutManager(this@MainAdminActivity, 2)
-            rvItemKonsumen.setHasFixedSize(true)
-            rvItemKonsumen.adapter = adapter
+            rvItemHouse.layoutManager = GridLayoutManager(this@DataRumahAdminActivity, 2)
+            rvItemHouse.setHasFixedSize(true)
+            rvItemHouse.adapter = adapter
         }
 
-        mainDataViewModel.getAllDataKonsumen()
+        mainDataViewModel.getAllDataRumah()
 
         mainDataViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        mainDataViewModel.dataKonsumen.observe(this) {
-            adapter.setListDataKonsumen(it)
+        mainDataViewModel.dataRumah.observe(this) {
+            adapter.setListRumahAdmin(it)
         }
 
         mainDataViewModel.error.observe(this) { event ->
             event.getContentIfNotHandled()?.let { error ->
                 if (error) {
-                    binding.rvItemKonsumen.adapter = null
+                    binding.rvItemHouse.adapter = null
                 }
             }
         }
