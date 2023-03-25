@@ -52,7 +52,7 @@
     <string name="img_progress">Image Progress Pembangunan</string>
     <string name="last_update">Terakhir Update</string>
     <string name="persentase">Persentase Progress Pembangunan :</string>
-    <string name="detail_progress">Detail Progress Pembangunan :</string>
+    <string name="detail_progress">Detail Progress Pembangunan : </string>
     <string name="detail_rumah_saya">Detail Data Rumah Saya</string>
     <string name="detail_rumah">Detail Data Rumah</string>
     <string name="btn_progress">Lihat Progress Pembangunan</string>
@@ -109,7 +109,7 @@
     <string-array name="data_home_admin">
         <item>Update Status Booking</item>
         <item>Tambah Akun Baru</item>
-        <item>Kelola Akun Konsumen</item>
+        <item>Kelola Akun</item>
     </string-array>
 
     <string-array name="data_home_pengawas">
@@ -135,24 +135,52 @@
     </string-array>
 
     <integer-array name="persentase_progress">
-        <item>10</item>
-        <item>40</item>
-        <item>60</item>
-        <item>70</item>
-        <item>75</item>
-        <item>80</item>
-        <item>85</item>
+        <item>12</item>
+        <item>41</item>
+        <item>50</item>
+        <item>74</item>
+        <item>91</item>
+        <item>97</item>
         <item>100</item>
     </integer-array>
 
     <string-array name="detail_progress">
-        <item>BowPlank, Sloof dan Pondasi</item>
-        <item>Kolom dan Penyusunan Bata</item>
-        <item>Ring Balok dan Ampig</item>
-        <item>Pemasangan Rangka Atap dan Gypsum</item>
-        <item>Pemasangan Genteng dan Nok</item>
-        <item>Pengacian dan Pengeboran</item>
-        <item>Pemasangan Keramik</item>
-        <item>Finishing</item>
+        <item>
+            Persiapan Lahan / Kavling\n
+            1) Pembuatan Bowplank\n
+            2) Galian Pondasi\n
+            3) Pasang Cerucup Gelam\n
+            4) Pasang Baru Pondasi\n
+            5) Penimbunan Pondasi\n
+            6) Pasang Besi Sloof / Cor Sloof\n
+            7) Pasang Besi / Behel Tiang Kolom
+        </item>
+        <item>
+            Pemasangan Dinding\n
+            1) Pasang Dinding Batu Bata\n
+            2) Cor Tiang Kolom\n
+            3) Pasang Kusen Pintu / Jendela\n
+            4) Pasang Besi Ring Balok / Cor\n
+            5) Pasang Dinding Tebeng Layar
+        </item>
+        <item>
+            Pemasangan Rangka Atap / Multiroof\n
+            1) Pemasangan Rangka Baja\n
+            2) Pemasangan Atap Seng Multiroof\n
+            3) Pemasangan Lisplang
+        </item>
+        <item>
+            Plester Dinding / Pengecatan Dinding\n
+            1) Plester Dinding / Plamir Dinding\n
+            2) Cat Tembok Dinding / Cat Pintu dan Jendela\n
+            3) Pasang Kunci Pintu dan Jendela
+        </item>
+        <item>
+            Pemasangan Keramik\n
+            1) Pengecoran Lantai dan Teras\n
+            2) Pemasangan Keramik Lantai dan WC
+        </item>
+        <item>Pembuatan Gali Sumur</item>
+        <item>Pemasangan Instalasi Listrik</item>
     </string-array>
 </resources>

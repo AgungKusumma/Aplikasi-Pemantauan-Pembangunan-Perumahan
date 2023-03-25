@@ -115,11 +115,22 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
 
         detailDataViewModel.dataRumah.observe(this) { rumah ->
             val nomorRumah = rumah.nomorRumah
+            val nama = rumah.dataAkunKonsumen?.nama
+            val email = rumah.dataAkunKonsumen?.email
             val progressPembangunan = rumah.progressPembangunan
             val detailProgress = rumah.detailsProgressPembangunan
 
             binding.apply {
                 "Nomor Rumah : $nomorRumah".also { tvNomorRumah.text = it }
+                if (nama != null && email != null) {
+                    tvNama.visibility = View.VISIBLE
+                    tvEmail.visibility = View.VISIBLE
+                    "Nama Pemilik Rumah : $nama".also { tvNama.text = it }
+                    "Email Pemilik Rumah : $email".also { tvEmail.text = it }
+                } else {
+                    tvNama.visibility = View.GONE
+                    tvEmail.visibility = View.GONE
+                }
                 "Progress Pembangunan saat ini : $progressPembangunan%".also {
                     tvProgress.text = it
                 }
@@ -144,6 +155,7 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
                 tvNewDetailProgress.visibility = View.VISIBLE
                 cameraButton.visibility = View.VISIBLE
                 progressButton.visibility = View.GONE
+                saveButton.visibility = View.VISIBLE
 
                 "Progress Pembangunan Terbaru : $persentaseProgress%".also {
                     tvNewProgress.text = it
@@ -151,6 +163,8 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
                 "Detail Progress Pembangunan Terbaru : $detailProgress".also {
                     tvNewDetailProgress.text = it
                 }
+            } else {
+                saveButton.visibility = View.GONE
             }
 
             progressButton.setOnClickListener {
@@ -222,10 +236,9 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
                 }
             }
         } else {
-            val msg = getString(R.string.empty_progress)
-            val msg1 = getString(R.string.empty_image)
+            val msg = getString(R.string.empty_image)
             Toast.makeText(this,
-                "$msg atau\n$msg1",
+                msg,
                 Toast.LENGTH_SHORT).show()
         }
     }
@@ -257,6 +270,7 @@ class UpdateStatusPembangunanActivity : AppCompatActivity() {
 
             val result = BitmapFactory.decodeFile(getFile?.path)
             binding.previewImage.setImageBitmap(result)
+            binding.cameraButton.visibility = View.GONE
         }
     }
 
