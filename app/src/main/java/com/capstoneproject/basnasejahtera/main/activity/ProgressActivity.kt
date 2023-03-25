@@ -72,7 +72,9 @@ class ProgressActivity : AppCompatActivity() {
                 "Terakhir Update : $cutDate".also { binding.tvLastUpdate.text = it }
                 progressBar.progress = persentaseProgress
                 "$persentaseProgress%".also { textViewProgress.text = it }
-                "Detail Progress Pembangunan : $detailProgress".also { tvDetailProgress.text = it }
+                "Detail Progress Pembangunan : \n$detailProgress".also {
+                    tvDetailProgress.text = it
+                }
                 Glide.with(this@ProgressActivity)
                     .load(img)
                     .placeholder(R.drawable.progress)

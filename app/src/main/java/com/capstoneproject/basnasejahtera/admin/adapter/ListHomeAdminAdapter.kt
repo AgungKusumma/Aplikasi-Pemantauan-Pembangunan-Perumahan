@@ -49,7 +49,7 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                         binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_50))
                     }
-                    "Kelola Akun Konsumen" -> {
+                    "Kelola Akun" -> {
                         binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
                             R.color.blue_50))
                     }
@@ -67,7 +67,7 @@ class ListHomeAdminAdapter(private val listData: ArrayList<ItemData>) :
                                 Intent(itemView.context, SignupActivity::class.java)
                             itemView.context.startActivity(intent)
                         }
-                        "Kelola Akun Konsumen" -> {
+                        "Kelola Akun" -> {
                             val intent =
                                 Intent(itemView.context, MainKelolaAkunActivity::class.java)
                             itemView.context.startActivity(intent)
